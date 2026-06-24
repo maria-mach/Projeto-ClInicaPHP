@@ -1,0 +1,28 @@
+
+:root {
+  --cg-azul-turquesa: #0e221f;  
+  --cg-ciano: #68b8b4;
+}
+
+.cg-bg-primaria {
+  background-color: var(--cg-azul-turquesa) !important;
+}
+.cg-bg-secundaria {
+  background-color: var(--cg-ciano) !important;
+}
+
+
+.cg-text-primaria {
+  color: var(--cg-azul-turquesa) !important;
+}
+.cg-text-secundaria {
+  color: var(--cg-ciano) !important;
+}
+
+.cg-border-primaria {
+  border-color: var(--cg-azul-turquesa) !important;
+}
+.cg-border-secundaria {
+  border-color: var(--cg-ciano) !important;
+}
+
