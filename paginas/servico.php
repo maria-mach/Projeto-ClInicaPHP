@@ -1,6 +1,6 @@
 <?php
 $tituloPagina = 'Clínica Geral | Serviços';
-require_once __DIR__ . '/partials/header.php';
+require_once __DIR__ . '/../partials/header.php';
 ?>
 
         <main class="app-main">
@@ -32,7 +32,7 @@ require_once __DIR__ . '/partials/header.php';
                                         </div>
                                         <p>Agende sua consulta com facilidade e tenha acompanhamento médico sempre à
                                             disposição.</p>
-                                        <a href="detalhes.php#sec-consultas" class="btn btn-outline-success btn-sm mt-2">Saiba mais</a>
+                                        <a href="<?= esc(url_path('paginas/detalhes.php#sec-consultas')) ?>" class="btn btn-outline-success btn-sm mt-2">Saiba mais</a>
                                     </div>
                                     <!-- /.card-body -->
                                 </div>
@@ -52,7 +52,7 @@ require_once __DIR__ . '/partials/header.php';
                                             <i class="fas fa-hospital fs-1 text-success"></i>
                                         </div>
                                         <p>Resultados rápidos e precisos para cuidar da sua saúde e dos seus familiares com confiança.</p>
-                                        <a href="detalhes.php#sec-exames" class="btn btn-outline-success btn-sm mt-2">Saiba mais</a>
+                                        <a href="<?= esc(url_path('paginas/detalhes.php#sec-exames')) ?>" class="btn btn-outline-success btn-sm mt-2">Saiba mais</a>
                                     </div>
                                     <!-- /.card-body -->
                                 </div>
@@ -73,7 +73,7 @@ require_once __DIR__ . '/partials/header.php';
                                         </div>
                                         <p>Estrutura moderna e equipe especializada para garantir segurança em cada
                                             procedimento</p>
-                                        <a href="detalhes.php#sec-cirurgias" class="btn btn-outline-success btn-sm mt-2">Saiba mais</a>
+                                        <a href="<?= esc(url_path('paginas/detalhes.php#sec-cirurgias')) ?>" class="btn btn-outline-success btn-sm mt-2">Saiba mais</a>
                                     </div>
                                     <!-- /.card-body -->
                                 </div>
@@ -87,7 +87,7 @@ require_once __DIR__ . '/partials/header.php';
                 <div class="container">
                     <div class="row mt-5 mb-4 px-3">
                         <div class="col-12 d-flex justify-content-between border-top pt-4">
-                            <a href="empresa.php" class="text-decoration-none text-secondary">Empresa</a>
+                            <a href="<?= esc(url_path('paginas/empresa.php')) ?>" class="text-decoration-none text-secondary">Empresa</a>
                             <div></div>
                         </div>
                     </div>
@@ -96,4 +96,4 @@ require_once __DIR__ . '/partials/header.php';
             </div> <!-- /.app-content -->
         </main>
 
-<?php require_once __DIR__ . '/partials/footer.php'; ?>
+<?php require_once __DIR__ . '/../partials/footer.php'; ?>

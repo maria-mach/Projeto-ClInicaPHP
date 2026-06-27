@@ -1,6 +1,6 @@
 <?php
 $tituloPagina = 'Clínica Geral | Clientes';
-require_once __DIR__ . '/partials/header.php';
+require_once __DIR__ . '/../partials/header.php';
 ?>
 
         <main class="app-main">
@@ -22,19 +22,19 @@ require_once __DIR__ . '/partials/header.php';
                             </div>
                             <div class="row text-center g-4 mb-5">
                                 <div class="col-md-4">
-                                    <img src="./assets/img/avatar3.png" class="rounded-circle mb-3 shadow" width="100"
+                                    <img src="<?= esc(url_path('assets/img/avatar3.png')) ?>" class="rounded-circle mb-3 shadow" width="100"
                                         alt="Cliente 1">
                                     <h5>Maria Silva</h5>
                                     <p class="text-muted small">Paciente desde 2021</p>
                                 </div>
                                 <div class="col-md-4">
-                                    <img src="./assets/img/avatar.png" class="rounded-circle mb-3 shadow" width="100"
+                                    <img src="<?= esc(url_path('assets/img/avatar.png')) ?>" class="rounded-circle mb-3 shadow" width="100"
                                         alt="Cliente 2">
                                     <h5>João Rodrigues</h5>
                                     <p class="text-muted small">Atendimento Corporativo</p>
                                 </div>
                                 <div class="col-md-4">
-                                    <img src="./assets/img/avatar2.png" class="rounded-circle mb-3 shadow" width="100"
+                                    <img src="<?= esc(url_path('assets/img/avatar2.png')) ?>" class="rounded-circle mb-3 shadow" width="100"
                                         alt="Cliente 3">
                                     <h5>Ana Clara</h5>
                                     <p class="text-muted small">Saúde da Família</p>
@@ -45,15 +45,15 @@ require_once __DIR__ . '/partials/header.php';
                                     nós?</h5>
                                 <p>Temos orgulho de compartilhar as experiências positivas de nossos pacientes. Acesse o
                                     painel de comentários para ler os depoimentos.</p>
-                                <a href="comentarios.php" class="btn btn-success"><i
+                                <a href="<?= esc(url_path('paginas/comentarios.php')) ?>" class="btn btn-success"><i
                                         class="fas fa-external-link-alt me-2"></i>Ler Comentários</a>
                                 <p  class="mt-2">Quantidade de clientes: <span id="contador">0</span></p>
                                 <button id="btn_contador" class="btn btn-success"><i
                                         class="fas fa-external-link-alt me-2"></i>Adicione Clientes</button>
                             </div>
-                            </div>
                         </div>
                     </div>
+        
 
                     <!-- Galeria de Projetos/Clientes -->
                     <div class="card shadow-sm border-0 mb-4">
@@ -61,16 +61,16 @@ require_once __DIR__ . '/partials/header.php';
                             <h4 class="text-primary mb-4 text-center">Galeria de Unidades e Projetos</h4>
                             <div class="row g-3">
                                 <div class="col-md-3">
-                                    <img src="./assets/img/medicos-andando.jpg" class="img-fluid rounded shadow-sm galeria-item" style="cursor: pointer;" alt="Equipe em atendimento">
+                                   <img src="<?= esc(url_path('assets/img/medicos-andando.jpg')) ?>" class="img-fluid rounded shadow-sm galeria-item" style="cursor: pointer;" alt="Equipe em atendimento">
                                 </div>
                                 <div class="col-md-3">
-                                    <img src="./assets/img/medicos-cirurgia.jpg" class="img-fluid rounded shadow-sm galeria-item" style="cursor: pointer;" alt="Bloco cirúrgico">
+                                    <img src="<?= esc(url_path('assets/img/medicos-cirurgia.jpg')) ?>" class="img-fluid rounded shadow-sm galeria-item" style="cursor: pointer;" alt="Bloco cirúrgico">
                                 </div>
                                 <div class="col-md-3">
-                                    <img src="./assets/img/medica-segurando.jpg" class="img-fluid rounded shadow-sm galeria-item" style="cursor: pointer;" alt="Atendimento pediátrico">
+                                    <img src="<?= esc(url_path('assets/img/medica-segurando.jpg')) ?>" class="img-fluid rounded shadow-sm galeria-item" style="cursor: pointer;" alt="Atendimento pediátrico">
                                 </div>
                                 <div class="col-md-3">
-                                    <img src="./assets/img/medica-injecao.jpg" class="img-fluid rounded shadow-sm galeria-item" style="cursor: pointer;" alt="Vacinação">
+                                    <img src="<?= esc(url_path('assets/img/medica-injecao.jpg')) ?>" class="img-fluid rounded shadow-sm galeria-item" style="cursor: pointer;" alt="Vacinação">
                                 </div>
                             </div>
                         </div>
@@ -96,12 +96,12 @@ require_once __DIR__ . '/partials/header.php';
             <div class="container">
                 <div class="row mt-5 mb-4 px-3">
                     <div class="col-12 d-flex justify-content-between border-top pt-4">
-                        <a href="empresa.php" class="text-decoration-none text-secondary">Empresa</a>
-                        <a href="detalhes.php" class="text-decoration-none text-primary fw-bold">Detalhes</a>
-                        <a href="local.php" class="text-decoration-none text-primary fw-bold">Local</a>
+                        <a href="<?= esc(url_path('paginas/empresa.php')) ?>" class="text-decoration-none text-secondary">Empresa</a>
+                        <a href="<?= esc(url_path('paginas/detalhes.php')) ?>" class="text-decoration-none text-primary fw-bold">Detalhes</a>
+                        <a href="<?= esc(url_path('paginas/local.php')) ?>" class="text-decoration-none text-primary fw-bold">Local</a>
                     </div>
                 </div>
             </div>
         </main>
 
-<?php require_once __DIR__ . '/partials/footer.php'; ?>
+<?php require_once __DIR__ . '/../partials/footer.php'; ?>

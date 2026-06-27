@@ -1,6 +1,6 @@
 <?php
 $tituloPagina = 'Clínica Geral | Redes Sociais';
-require_once __DIR__ . '/partials/header.php';
+require_once __DIR__ . '/../partials/header.php';
 ?>
 
         <main class="app-main">
@@ -67,11 +67,11 @@ require_once __DIR__ . '/partials/header.php';
             <div class="container">
                 <div class="row mt-5 mb-4 px-3">
                     <div class="col-12 d-flex justify-content-between border-top pt-4">
-                        <a href="local.php" class="text-decoration-none text-secondary">Local</a>
-                        <a href="comentarios.php" class="text-decoration-none text-primary fw-bold">Comentários</a>
+                        <a href="<?= esc(url_path('paginas/local.php')) ?>" class="text-decoration-none text-secondary">Local</a>
+                        <a href="<?= esc(url_path('paginas/comentarios.php')) ?>" class="text-decoration-none text-primary fw-bold">Comentários</a>
                     </div>
                 </div>
             </div> <!-- /.container (nav area) -->
         </main>
 
-<?php require_once __DIR__ . '/partials/footer.php'; ?>
+<?php require_once __DIR__ . '/../partials/footer.php'; ?>

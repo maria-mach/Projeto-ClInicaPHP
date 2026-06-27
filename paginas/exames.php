@@ -1,6 +1,6 @@
 <?php
 $tituloPagina = 'Clínica | Exames';
-require_once __DIR__ . '/partials/header.php';
+require_once __DIR__ . '/../partials/header.php';
 ?>
 
         <main class="app-main">
@@ -138,12 +138,11 @@ require_once __DIR__ . '/partials/header.php';
 
                     <div class="row mt-5 mb-4 px-3">
                         <div class="col-12 d-flex justify-content-between border-top pt-4">
-                            <a href="index.php" class="text-decoration-none text-secondary">Início</a>
-                            <div></div>
+                            <a href="<?= esc(url_path('paginas/index.php')) ?>" class="text-decoration-none text-secondary">Início</a>
                         </div>
                     </div>
                 </div>
             </div>
         </main>
 
-<?php require_once __DIR__ . '/partials/footer.php'; ?>
+<?php require_once __DIR__ . '/../partials/footer.php'; ?>

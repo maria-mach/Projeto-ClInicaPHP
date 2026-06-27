@@ -1,6 +1,6 @@
 <?php
 $tituloPagina = 'Clínica Geral | Detalhes';
-require_once __DIR__ . '/partials/header.php';
+require_once __DIR__ . '/../partials/header.php';
 ?>
 
         <main class="app-main">
@@ -13,13 +13,13 @@ require_once __DIR__ . '/partials/header.php';
 
                             <!-- imagem -->
                             <div class="text-center mb-4">
-                                <img src="./assets/img/medica-segurando.jpg" class="img-fluid rounded shadow-sm w-50"
+                                <img src="<?= esc(url_path('assets/img/medica-segurando.jpg')) ?>" class="img-fluid rounded shadow-sm w-50"
                                     alt="Médica verificando cordão de soro">
                             </div>
 
                             <!-- botão -->
                             <div class="text-center mb-4">
-                                <a href="consultas.php" class="btn btn-success btn-lg shadow-sm">
+                                <a href="<?= esc(url_path('paginas/consultas.php')) ?>" class="btn btn-success btn-lg shadow-sm">
                                     Agendar Consulta
                                 </a>
                             </div>
@@ -65,13 +65,13 @@ require_once __DIR__ . '/partials/header.php';
 
                             <!-- imagem -->
                             <div class="text-center mb-4">
-                                <img src="./assets/img/medica-injecao.jpg" class="img-fluid rounded shadow-sm w-50"
+                                <img src="<?= esc(url_path('assets/img/medica-segurando.jpg')) ?>" class="img-fluid rounded shadow-sm w-50"
                                     alt="Médica aplicando injeção">
                             </div>
 
                             <!-- botão -->
                             <div class="text-center mb-4">
-                                <a href="exames.php" class="btn btn-success btn-lg shadow-sm">
+                                <a href="<?= esc(url_path('paginas/exames.php')) ?>" class="btn btn-success btn-lg shadow-sm">
                                     Agendar Exame
                                 </a>
                             </div>
@@ -117,13 +117,13 @@ require_once __DIR__ . '/partials/header.php';
 
                             <!-- imagem -->
                             <div class="text-center mb-4">
-                                <img src="./assets/img/medicos-cirurgia.jpg" class="img-fluid rounded shadow-sm w-50"
+                                <img src="<?= esc(url_path('assets/img/medicos-cirurgia.jpg')) ?>" class="img-fluid rounded shadow-sm w-50"
                                     alt="Equipe médica em cirurgia">
                             </div>
 
                             <!-- botão -->
                             <div class="text-center mb-4">
-                                <a href="cirurgias.php" class="btn btn-success btn-lg shadow-sm">
+                                <a href="<?= esc(url_path('paginas/cirurgias.php')) ?>" class="btn btn-success btn-lg shadow-sm">
                                     Agendar Cirurgia
                                 </a>
                             </div>
@@ -169,13 +169,13 @@ require_once __DIR__ . '/partials/header.php';
                 <div class="container">
                     <div class="row mt-5 mb-4 px-3">
                         <div class="col-12 d-flex justify-content-between border-top pt-4">
-                            <a href="servico.php" class="text-decoration-none text-secondary">Serviços</a>
-                            <a href="clientes.php" class="text-decoration-none text-primary fw-bold">Sobre Clientes</a>
-                            <a href="precos.php" class="text-decoration-none text-primary fw-bold">Ver Preços</a>
+                            <a href="<?= esc(url_path('paginas/servico.php')) ?>" class="text-decoration-none text-secondary">Serviços</a>
+                            <a href="<?= esc(url_path('paginas/clientes.php')) ?>" class="text-decoration-none text-primary fw-bold">Sobre Clientes</a>
+                            <a href="<?= esc(url_path('paginas/precos.php')) ?>" class="text-decoration-none text-primary fw-bold">Ver Preços</a>
                         </div>
                     </div>
                 </div>
             </div>
         </main>
 
-<?php require_once __DIR__ . '/partials/footer.php'; ?>
+<?php require_once __DIR__ . '/../partials/footer.php'; ?>

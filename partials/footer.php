@@ -1,10 +1,11 @@
-
         <!--begin::Footer-->
         <footer class="app-footer">
-            <div class="float-end d-none d-sm-inline">Tudo que você quiser</div>
+            <div class="float-end d-none d-sm-inline">Clínica Geral</div>
             <strong>
-                Copyright &copy; <?php echo date("Y"); ?>&nbsp;
-                <a href="index.php" class="text-decoration-none text-dark">Clínica Geral</a>.
+                Copyright &copy; <?= date("Y"); ?>&nbsp;
+                <a href="<?= esc(url_path('paginas/index.php')) ?>" class="text-decoration-none text-dark">
+                    Clínica Geral
+                </a>.
             </strong>
             Todos os direitos reservados.
         </footer>
@@ -20,19 +21,26 @@
     <!--begin::Script-->
     <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/browser/overlayscrollbars.browser.es6.min.js"
         crossorigin="anonymous"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         crossorigin="anonymous"></script>
-    <script src="./js/adminlte.js"></script>
+
+    <script src="<?= esc(url_path('js/adminlte.js')) ?>"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
         const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
+
         const Default = {
             scrollbarTheme: 'os-theme-light',
             scrollbarAutoHide: 'leave',
             scrollbarClickScroll: true,
         };
+
         document.addEventListener('DOMContentLoaded', function () {
             const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
+
             if (sidebarWrapper && OverlayScrollbarsGlobal?.OverlayScrollbars !== undefined) {
                 OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
                     scrollbars: {
@@ -44,8 +52,13 @@
             }
         });
     </script>
-    <script src="./js/meujs.js"></script>
-    <!--end::Script-->
-</body>
+
+    <script>
+    const BASE_URL = "<?= esc(url_path('')) ?>";
+    </script>
+
+    <script src="<?= esc(url_path('js/meujs.js')) ?>"></script>
+            <!--end::Script-->
+    </body>
 
 </html>

@@ -1,6 +1,6 @@
 <?php
 $tituloPagina = 'Clínica Geral | Empresa';
-require_once __DIR__ . '/partials/header.php';
+require_once __DIR__ . '/../partials/header.php';
 ?>
 
         <main class="app-main">
@@ -49,7 +49,7 @@ require_once __DIR__ . '/partials/header.php';
                                 <h5 class="mb-3">Quer nos fazer uma visita?</h5>
                                 <p class="text-muted">Possuímos várias unidades estrategicamente localizadas para melhor
                                     atender você.</p>
-                                <a href="local.php" class="btn btn-primary mt-2"><i
+                                <a href="<?= esc(url_path('paginas/local.php')) ?>" class="btn btn-primary mt-2"><i
                                         class="fas fa-map-marker-alt me-2"></i>Ver Nossas Unidades</a>
                                 <button id="infoClick" class="btn btn-primary mt-2"><i
                                         class="fas fa-info-circle me-2"></i>Mais detalhes sobre nós</button>
@@ -66,10 +66,10 @@ require_once __DIR__ . '/partials/header.php';
                 <div class="container">
                     <div class="row mt-5 mb-4 px-3">
                         <div class="col-12 d-flex justify-content-between border-top pt-4">
-                            <a href="index.php" class="text-decoration-none text-secondary">Home</a>
-                            <a href="servico.php" class="text-decoration-none text-primary fw-bold">Serviços</a>
-                            <a href="clientes.php" class="text-decoration-none text-primary fw-bold">Sobre Clientes</a>
-                            <a href="contato.php" class="text-decoration-none text-primary fw-bold">Contato</a>
+                            <a href="<?= esc(url_path('paginas/index.php')) ?>" class="text-decoration-none text-secondary">Home</a>
+                            <a href="<?= esc(url_path('paginas/servico.php')) ?>" class="text-decoration-none text-primary fw-bold">Serviços</a>
+                            <a href="<?= esc(url_path('paginas/clientes.php')) ?>" class="text-decoration-none text-primary fw-bold">Sobre Clientes</a>
+                            <a href="<?= esc(url_path('paginas/contato.php')) ?>" class="text-decoration-none text-primary fw-bold">Contato</a>
                         </div>
                     </div>
 
@@ -77,4 +77,4 @@ require_once __DIR__ . '/partials/header.php';
             </div> <!-- /.app-content -->
         </main>
 
-<?php require_once __DIR__ . '/partials/footer.php'; ?>
+<?php require_once __DIR__ . '/../partials/footer.php'; ?>

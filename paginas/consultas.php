@@ -1,6 +1,6 @@
 <?php
 $tituloPagina = 'Clínica | Consultas';
-require_once __DIR__ . '/partials/header.php';
+require_once __DIR__ . '/../partials/header.php';
 ?>
 
         <main class="app-main">
@@ -25,8 +25,10 @@ require_once __DIR__ . '/partials/header.php';
                         <div class="col-md-4">
                             <select class="form-select shadow-sm">
                                 <option selected>Filtrar por Especialidade/Tipo</option>
-                                <option value="1">Clínico Geral</option>\n <option value="2">Cardiologia</option>\n
-                                <option value="3">Pediatria</option>\n <option value="4">Ortopedia</option>\n
+                                <option value="1">Clínico Geral</option>
+                                <option value="2">Cardiologia</option>
+                                <option value="3">Pediatria</option>
+                                <option value="4">Ortopedia</option>
                             </select>
                         </div>
                     </div>
@@ -139,7 +141,7 @@ require_once __DIR__ . '/partials/header.php';
                     <div class="container">
                         <div class="row mt-5 mb-4 px-3">
                             <div class="col-12 d-flex justify-content-between border-top pt-4">
-                                <a href="index.php" class="text-decoration-none text-secondary">Início</a>
+                                <a href="<?= esc(url_path('paginas/index.php')) ?>" class="text-decoration-none text-secondary">Início</a>
                                 <div></div>
                             </div>
                         </div>
@@ -149,4 +151,4 @@ require_once __DIR__ . '/partials/header.php';
             </div> <!-- /.app-main wrapper -->
         </main>
 
-<?php require_once __DIR__ . '/partials/footer.php'; ?>
+<?php require_once __DIR__ . '/../partials/footer.php'; ?>

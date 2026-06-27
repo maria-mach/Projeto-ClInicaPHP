@@ -1,0 +1,97 @@
+================================================================================
+                 DOCUMENTAÇÃO DAS FUNÇÕES JQUERY NO PROJETO
+================================================================================
+
+Arquivo: js/meujs.js
+
+================================================================================
+1. BoasVindas()
+================================================================================
+Localização: Home (index.php)
+Descrição: Exibe um popup (Toast) de "Bem-vindo" no topo central da página 
+           inicial, que desaparece automaticamente após 5 segundos.
+Uso: Chamado automaticamente ao carregar a home.
+
+================================================================================
+2. cliqueInfo()
+================================================================================
+Localização: Empresa (empresa.php)
+Descrição: Mostra ou esconde uma seção de informações extras quando o usuário 
+           clica no botão com ID "infoClick".
+Uso: Acionado ao clicar em elemento com ID "infoClick".
+
+================================================================================
+3. MouseEntrou() / MouseSaiu()
+================================================================================
+Localização: Produto ou Serviço (servico.php)
+Descrição: Muda a cor de fundo dos cards (classe "cdhover") para azul claro 
+           quando o mouse entra e volta para branco quando sai.
+Uso: Hover em elementos com classe "cdhover".
+
+================================================================================
+4. VerDetalhes()
+================================================================================
+Localização: Detalhes (detalhes.php)
+Descrição: Alterna a visibilidade (mostra/esconde) de detalhes extras com um 
+           efeito de slide suave (slideToggle). Funciona dinamicamente usando 
+           o atributo "data-target".
+Uso: Clique em botões com classe "btn-ver-detalhes".
+
+================================================================================
+5. Incrementar()
+================================================================================
+Localização: Clientes (clientes.php)
+Descrição: Aumenta o contador de clientes e atualiza o número na tela quando 
+           o botão "Adicione Clientes" é clicado.
+Uso: Clique em elemento com ID "btn_contador".
+
+================================================================================
+6. ValideForm(event)
+================================================================================
+Localização: Contato (contato.php)
+Descrição: Valida o formulário de contato, impedindo o envio se houver campos 
+           vazios e exibindo uma mensagem de alerta.
+Uso: Submit do formulário com ID "formOb".
+
+================================================================================
+7. attContador()
+================================================================================
+Localização: Contato (contato.php)
+Descrição: Conta e exibe o número de caracteres digitados no campo de mensagem 
+           do formulário em tempo real.
+Uso: Entrada de texto no elemento com ID "txt_mensagem".
+
+================================================================================
+8. BtnTopo()
+================================================================================
+Localização: Global (Todas as páginas)
+Descrição: Gerencia o botão "Voltar ao Topo" que aparece quando o usuário 
+           rola a página para baixo, permitindo voltar ao topo com animação 
+           suave.
+Uso: Automático ao carregar qualquer página com elemento ID "btnTopo".
+
+================================================================================
+9. carregarComentarios()
+================================================================================
+Localização: Comentários (comentarios.php)
+Descrição: Carrega comentários de um arquivo JSON (js/comentarios.json) e cria 
+           dinamicamente um carrossel interativo.
+Uso: Clique em elemento com ID "btn_comentarios".
+
+================================================================================
+10. ConfigurarGaleria()
+================================================================================
+Localização: Clientes (clientes.php)
+Descrição: Configura a galeria interativa de imagens, permitindo ampliar as 
+           fotos em um modal ao clicar sobre elas.
+Uso: Clique em elementos com classe "galeria-item".
+
+================================================================================
+RESUMO DE DEPENDÊNCIAS
+================================================================================
+
+Bootstrap: Modal, Carousel, Toast (CSS/JS)
+jQuery: Manipulação DOM, eventos, AJAX
+JSON: js/comentarios.json (para carrossel de depoimentos)
+
+================================================================================

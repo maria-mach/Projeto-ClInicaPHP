@@ -1,6 +1,6 @@
 <?php
 $tituloPagina = 'Clínica Geral | Comentários';
-require_once __DIR__ . '/partials/header.php';
+require_once __DIR__ . '/../partials/header.php';
 ?>
 
         <main class="app-main">
@@ -74,9 +74,9 @@ require_once __DIR__ . '/partials/header.php';
                     <div class="container">
                         <div class="row mt-5 mb-4 px-3">
                             <div class="col-12 d-flex justify-content-between border-top pt-4">
-                                <a href="clientes.php" class="text-decoration-none text-secondary">Clientes</a>
-                                <a href="redes_sociais.php" class="text-decoration-none text-primary fw-bold">Redes Sociais</a>
-                                <a href="precos.php" class="text-decoration-none text-primary fw-bold">Preços</a>
+                                <a href="<?= esc(url_path('paginas/clientes.php')) ?>" class="text-decoration-none text-secondary">Clientes</a>
+                                <a href="<?= esc(url_path('paginas/redes_sociais.php')) ?>" class="text-decoration-none text-primary fw-bold">Redes Sociais</a>
+                                <a href="<?= esc(url_path('paginas/precos.php')) ?>" class="text-decoration-none text-primary fw-bold">Preços</a>
                             </div>
                         </div>
                     </div>
@@ -84,4 +84,4 @@ require_once __DIR__ . '/partials/header.php';
             </div>
         </main>
 
-<?php require_once __DIR__ . '/partials/footer.php'; ?>
+<?php require_once __DIR__ . '/../partials/footer.php'; ?>

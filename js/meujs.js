@@ -103,7 +103,7 @@ function BtnTopo() {
 // Função que carrega comentários de um arquivo JSON e monta o carrossel
 function carregarComentarios() {
   // Usa o jQuery para ler o arquivo JSON de forma simples
-  $.getJSON("js/comentarios.json", function (dados) {
+  $.getJSON(BASE_URL + "js/comentarios.json", function (dados) {
     const $inner = $("#carouselDepoimentos .carousel-inner");
     $inner.empty(); // Limpa itens antigos
 
