@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Clínica Geral
 
 Sistema web desenvolvido para uma clínica médica fictícia, com foco na apresentação de serviços, gerenciamento de usuários e autenticação.
