@@ -80,6 +80,3 @@ xampp/htdocs/
 http://localhost/ClinicaPHP
 ```
 
-## Desenvolvedora
-
-**Maria Eduarda**
