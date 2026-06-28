@@ -11,6 +11,7 @@ $(document).ready(function () {
   BtnTopo(); // Inicializa a lógica do botão "Voltar ao Topo"
   $("#btn_comentarios").click(carregarComentarios); // Configura o carregamento via JSON
   ConfigurarGaleria(); // Configura a galeria interativa na página Clientes
+
 });
 
 
@@ -46,9 +47,9 @@ function MouseSaiu() {
 // Alterna a visibilidade de seções escondidas com efeito de slide (toggle)
 function VerDetalhes() {
   // Obtém o ID do alvo através do atributo 'data-target'. Se não existir, usa 'infoDetalhes' como padrão.
-  const targetId = $(this).attr("data-target") || "infoDetalhes";
+   const targetId = $(this).attr("data-target") || "infoDetalhes";
   // Alterna a visibilidade com o efeito de deslizamento em 1 segundo
-  $(`#${targetId}`).removeClass("d-none").slideToggle(1000);
+  $(`#${targetId}`).slideToggle(1000);
 }
 
 // Incrementa o contador global e atualiza o texto no HTML

@@ -68,3 +68,16 @@ function esc(string $valor): string
 {
     return htmlspecialchars($valor, ENT_QUOTES, 'UTF-8');
 }
+
+function contar_acesso_restrito(): int
+{
+    iniciar_sessao();
+
+    if (!isset($_SESSION['visitas_restrita'])) {
+        $_SESSION['visitas_restrita'] = 1;
+    } else {
+        $_SESSION['visitas_restrita']++;
+    }
+
+    return $_SESSION['visitas_restrita'];
+}

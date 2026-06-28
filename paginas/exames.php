@@ -135,12 +135,6 @@ require_once __DIR__ . '/../partials/header.php';
                             </div>
                         </div>
                     </div>
-
-                    <div class="row mt-5 mb-4 px-3">
-                        <div class="col-12 d-flex justify-content-between border-top pt-4">
-                            <a href="<?= esc(url_path('paginas/index.php')) ?>" class="text-decoration-none text-secondary">Início</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </main>

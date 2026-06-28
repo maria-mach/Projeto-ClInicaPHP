@@ -62,18 +62,6 @@ require_once __DIR__ . '/../partials/header.php';
                         </div> <!-- /.container -->
                     </div> <!-- /.card -->
                 </div> <!-- /.container -->
-
-                <div class="container">
-                    <div class="row mt-5 mb-4 px-3">
-                        <div class="col-12 d-flex justify-content-between border-top pt-4">
-                            <a href="<?= esc(url_path('paginas/index.php')) ?>" class="text-decoration-none text-secondary">Home</a>
-                            <a href="<?= esc(url_path('paginas/servico.php')) ?>" class="text-decoration-none text-primary fw-bold">Serviços</a>
-                            <a href="<?= esc(url_path('paginas/clientes.php')) ?>" class="text-decoration-none text-primary fw-bold">Sobre Clientes</a>
-                            <a href="<?= esc(url_path('paginas/contato.php')) ?>" class="text-decoration-none text-primary fw-bold">Contato</a>
-                        </div>
-                    </div>
-
-                </div>
             </div> <!-- /.app-content -->
         </main>
 

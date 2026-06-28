@@ -82,17 +82,6 @@ require_once __DIR__ . '/../partials/header.php';
                             <!-- /.card -->
                     </div> <!-- /.row -->
                 </div> <!-- /.container -->
-
-
-                <div class="container">
-                    <div class="row mt-5 mb-4 px-3">
-                        <div class="col-12 d-flex justify-content-between border-top pt-4">
-                            <a href="<?= esc(url_path('paginas/empresa.php')) ?>" class="text-decoration-none text-secondary">Empresa</a>
-                            <div></div>
-                        </div>
-                    </div>
-
-                </div>
             </div> <!-- /.app-content -->
         </main>
 

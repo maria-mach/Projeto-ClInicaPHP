@@ -70,25 +70,10 @@ require_once __DIR__ . '/../partials/header.php';
                         <div class="alert alert-info mt-3"><i class="bi bi-info-circle me-2"></i>Os valores são apenas
                             referenciais e dependem da complexidade de cada caso. Consulte a clínica para um orçamento
                             exato.
-
-
-
-
-
                         </div> <!-- /.alert -->
                     </div> <!-- /.table-responsive -->
 
                 </div> <!-- /.container (top) -->
-
-                <div class="container">
-                    <div class="row mt-5 mb-4 px-3">
-                        <div class="col-12 d-flex justify-content-between border-top pt-4">
-                            <a href="<?= esc(url_path('paginas/detalhes.php')) ?>" class="text-decoration-none text-secondary">Detalhes</a>
-                            <a href="<?= esc(url_path('paginas/comentarios.php')) ?>" class="text-decoration-none text-primary fw-bold">Comentários</a>
-                        </div>
-                    </div>
-                </div> <!-- /.container (nav) -->
-
             </div> <!-- /.app-content -->
         </main>
 

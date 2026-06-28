@@ -92,16 +92,6 @@ require_once __DIR__ . '/../partials/header.php';
                     </div>
                 </div>
             </div>
-
-            <div class="container">
-                <div class="row mt-5 mb-4 px-3">
-                    <div class="col-12 d-flex justify-content-between border-top pt-4">
-                        <a href="<?= esc(url_path('paginas/empresa.php')) ?>" class="text-decoration-none text-secondary">Empresa</a>
-                        <a href="<?= esc(url_path('paginas/detalhes.php')) ?>" class="text-decoration-none text-primary fw-bold">Detalhes</a>
-                        <a href="<?= esc(url_path('paginas/local.php')) ?>" class="text-decoration-none text-primary fw-bold">Local</a>
-                    </div>
-                </div>
-            </div>
         </main>
 
 <?php require_once __DIR__ . '/../partials/footer.php'; ?>

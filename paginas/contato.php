@@ -62,7 +62,7 @@ require_once __DIR__ . '/../partials/header.php';
                         <div class="col-md-6">
                             <div class="card shadow-sm border-0 h-100">
                                 <div class="card-header bg-success text-white">
-                                    <h5 class="mb-0"><i class="bi bi-envelope-paper me-2"></i>Envie uma Mensagem</h5>
+                                    <h5 class="mb-0"><i class="bi bi-envelope-paper me-2"></i>Comentários, Sugestões e Dúvidas.</h5>
                                 </div>
                                 <div class="card-body">
                                     <div id="mensagem" class="erro"></div>
@@ -88,19 +88,10 @@ require_once __DIR__ . '/../partials/header.php';
                                         </div>
                                         <button type="submit" class="btn btn-primary w-100">Enviar Mensagem</button>
                                     </form>
-                                </div> <!-- /.card-body -->
+                                </div> 
                             </div> <!-- /.card -->
-                        </div> <!-- /.col-md-6 (Envie uma Mensagem) -->
-                    </div> <!-- /.row g-4 (Canais + Form) -->
-
-                    <div class="container">
-                        <div class="row mt-5 mb-4 px-3">
-                            <div class="col-12 d-flex justify-content-between border-top pt-4">
-                                <a href="<?= esc(url_path('paginas/empresa.php')) ?>" class="text-decoration-none text-secondary">Empresa</a>
-                                <a href="<?= esc(url_path('paginas/local.php')) ?>" class="text-decoration-none text-primary fw-bold">Locais</a>
-                            </div>
-                        </div>
-                    </div> <!-- /.container (Empresa/Locais links) -->
+                        </div> 
+                    </div> 
                 </div> <!-- /.container (main content) -->
             </div> <!-- /.app-content -->
         </main>

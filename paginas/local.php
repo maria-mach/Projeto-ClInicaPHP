@@ -75,18 +75,6 @@ require_once __DIR__ . '/../partials/header.php';
 
                 </div> <!-- /.container -->
             </div> <!-- /.app-content -->
-
-
-            <div class="container">
-                <div class="row mt-5 mb-4 px-3">
-                    <div class="col-12 d-flex justify-content-between border-top pt-4">
-                        <a href="<?= esc(url_path('paginas/contato.php')) ?>" class="text-decoration-none text-secondary">Contato</a>
-                        <a href="<?= esc(url_path('paginas/clientes.php')) ?>" class="text-decoration-none text-primary fw-bold">Sobre clientes</a>
-                        <a href="<?= esc(url_path('paginas/redes_sociais.php')) ?>" class="text-decoration-none text-primary fw-bold">Redes Sociais</a>
-                    </div>
-                </div>
-
-            </div>
         </main>
 
 <?php require_once __DIR__ . '/../partials/footer.php'; ?>
