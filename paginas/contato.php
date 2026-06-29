@@ -1,6 +1,10 @@
 <?php
 $tituloPagina = 'Clínica Geral | Contato';
 require_once __DIR__ . '/../partials/header.php';
+
+$sucesso = filter_input(INPUT_GET, 'sucesso', FILTER_VALIDATE_INT);
+$erro = filter_input(INPUT_GET, 'erro', FILTER_VALIDATE_INT);
+
 ?>
 
         <main class="app-main">
@@ -65,28 +69,90 @@ require_once __DIR__ . '/../partials/header.php';
                                     <h5 class="mb-0"><i class="bi bi-envelope-paper me-2"></i>Comentários, Sugestões e Dúvidas.</h5>
                                 </div>
                                 <div class="card-body">
-                                    <div id="mensagem" class="erro"></div>
-                                    <form id="formOb">
-                                        <div class="mb-3">
-                                            <label class="form-label">Nome Completo</label>
-                                            <input id="nome" type="text" class="form-control" placeholder="Seu nome">
+                                    <div id="mensagem"></div>
+                                    <?php if ($sucesso === 1): ?>
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            Sua mensagem foi enviada com sucesso!
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                                         </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">E-mail</label>
-                                            <input id="email" type="email" class="form-control" placeholder="nome@exemplo.com">
+                                    <?php endif; ?>
+
+                                    <?php if ($erro === 2): ?>
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            Ocorreu um erro ao enviar sua mensagem. Tente novamente.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                                         </div>
+                                    <?php endif; ?>
+                                    <form id="formOb" action="<?= esc(url_path('database/comentarios/cadastrar_comentario.php')) ?>" method="POST">
+
                                         <div class="mb-3">
-                                            <label class="form-label">Assunto</label>
-                                            <input type="text" class="form-control"
-                                                placeholder="Dúvida, sugestão, elogio...">
+                                            <label for="nome" class="form-label">Nome Completo</label>
+                                            <input
+                                                id="nome"
+                                                name="nome"
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="Seu nome"
+                                                required>
                                         </div>
+
                                         <div class="mb-3">
-                                            <label class="form-label">Mensagem</label>
-                                            <textarea id="txt_mensagem" class="form-control" rows="4"
-                                                placeholder="Escreva sua mensagem aqui"></textarea>
-                                            <div id="txt_contador"></div>
+                                            <label for="email" class="form-label">E-mail</label>
+                                            <input
+                                                id="email"
+                                                name="email"
+                                                type="email"
+                                                class="form-control"
+                                                placeholder="nome@exemplo.com"
+                                                required>
                                         </div>
-                                        <button type="submit" class="btn btn-primary w-100">Enviar Mensagem</button>
+
+                                        <div class="mb-3">
+                                            <label for="assunto" class="form-label">Assunto</label>
+                                            <input
+                                                id="assunto"
+                                                name="assunto"
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="Assunto da mensagem"
+                                                required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="tipo" class="form-label">Tipo de mensagem</label>
+                                            <select
+                                                id="tipo"
+                                                name="tipo"
+                                                class="form-select"
+                                                required>
+
+                                                <option value="">Selecione...</option>
+                                                <option value="comentario">Comentário</option>
+                                                <option value="duvida">Dúvida</option>
+                                                <option value="sugestao">Sugestão</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="txt_mensagem" class="form-label">Mensagem</label>
+                                            <textarea
+                                                id="txt_mensagem"
+                                                name="mensagem"
+                                                class="form-control"
+                                                rows="5"
+                                                maxlength="500"
+                                                placeholder="Escreva sua mensagem aqui"
+                                                required></textarea>
+
+                                            <div id="txt_contador" class="form-text text-end">
+                                                0 / 500 caracteres
+                                            </div>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary w-100">
+                                            Enviar Mensagem
+                                        </button>
+
                                     </form>
                                 </div> 
                             </div> <!-- /.card -->

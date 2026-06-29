@@ -2,96 +2,223 @@
                  DOCUMENTAÇÃO DAS FUNÇÕES JQUERY NO PROJETO
 ================================================================================
 
-Arquivo: js/meujs.js
+Arquivo analisado: js/meujs.js
+Projeto: ClinicaPHP
+Observação: nenhuma função foi excluída. As funções sem uso atual foram apenas
+marcadas como "LEGADO/SEM USO ATUAL" para revisão futura.
 
 ================================================================================
-1. BoasVindas()
+1. $(document).ready(...)
 ================================================================================
-Localização: Home (index.php)
-Descrição: Exibe um popup (Toast) de "Bem-vindo" no topo central da página 
-           inicial, que desaparece automaticamente após 5 segundos.
-Uso: Chamado automaticamente ao carregar a home.
+Status: ATIVO
+Descrição: ponto inicial do JavaScript. Registra os eventos das funções abaixo
+quando a página termina de carregar.
+Funções chamadas:
+- BoasVindas()
+- cliqueInfo()
+- MouseEntrou() / MouseSaiu()
+- VerDetalhes()
+- Incrementar()
+- ValideForm()
+- attContador()
+- BtnTopo()
+- ConfigurarGaleria()
+- ConfigurarAgendamento()
+
+Observação: algumas chamadas não causam erro mesmo quando o seletor não existe,
+pois o jQuery simplesmente não encontra elementos correspondentes.
 
 ================================================================================
-2. cliqueInfo()
+2. BoasVindas()
 ================================================================================
-Localização: Empresa (empresa.php)
-Descrição: Mostra ou esconde uma seção de informações extras quando o usuário 
-           clica no botão com ID "infoClick".
-Uso: Acionado ao clicar em elemento com ID "infoClick".
+Status: LEGADO/SEM USO ATUAL VISÍVEL
+Local previsto: Home (index.php / paginas/index.php)
+Descrição: deveria exibir um Toast de boas-vindas quando a página inicial fosse
+aberta.
+Dependência HTML: elemento com ID "welcomeToast".
+Situação encontrada: não foi localizado elemento "welcomeToast" no projeto atual.
+Portanto, a função permanece no código, mas não produz efeito visual no estado
+atual do sistema.
+Recomendação: manter se o Toast voltar a ser usado; caso contrário, comentar no
+código como função legada.
 
 ================================================================================
-3. MouseEntrou() / MouseSaiu()
+3. cliqueInfo()
 ================================================================================
-Localização: Produto ou Serviço (servico.php)
-Descrição: Muda a cor de fundo dos cards (classe "cdhover") para azul claro 
-           quando o mouse entra e volta para branco quando sai.
-Uso: Hover em elementos com classe "cdhover".
+Status: ATIVO
+Localização: paginas/empresa.php
+Descrição: mostra ou oculta o parágrafo extra de informações da clínica.
+Dependências HTML:
+- Botão: #infoClick
+- Conteúdo: #infoMostrar
+Evento registrado:
+- $("#infoClick").click(cliqueInfo)
 
 ================================================================================
-4. VerDetalhes()
+4. MouseEntrou() / MouseSaiu()
 ================================================================================
-Localização: Detalhes (detalhes.php)
-Descrição: Alterna a visibilidade (mostra/esconde) de detalhes extras com um 
-           efeito de slide suave (slideToggle). Funciona dinamicamente usando 
-           o atributo "data-target".
-Uso: Clique em botões com classe "btn-ver-detalhes".
+Status: ATIVO
+Localização: paginas/servico.php
+Descrição: muda a cor de fundo dos cards com classe "cdhover" ao passar o mouse.
+Dependência HTML:
+- Elementos com classe .cdhover
+Evento registrado:
+- $(".cdhover").hover(MouseEntrou, MouseSaiu)
+
+Observação: a função altera a cor por JavaScript. Se quiser separar melhor
+responsabilidades, esse efeito poderia ser migrado futuramente para CSS (:hover),
+mas não é necessário agora.
 
 ================================================================================
-5. Incrementar()
+5. VerDetalhes()
 ================================================================================
-Localização: Clientes (clientes.php)
-Descrição: Aumenta o contador de clientes e atualiza o número na tela quando 
-           o botão "Adicione Clientes" é clicado.
-Uso: Clique em elemento com ID "btn_contador".
+Status: ATIVO
+Localização: paginas/detalhes.php
+Descrição: exibe/oculta blocos de detalhes com animação slideToggle(). Usa o
+atributo data-target para decidir qual seção abrir.
+Dependência HTML:
+- Botões com classe .btn-ver-detalhes
+- Seções com IDs indicados em data-target
+Evento registrado:
+- $(".btn-ver-detalhes").click(VerDetalhes)
 
 ================================================================================
-6. ValideForm(event)
+6. Incrementar()
 ================================================================================
-Localização: Contato (contato.php)
-Descrição: Valida o formulário de contato, impedindo o envio se houver campos 
-           vazios e exibindo uma mensagem de alerta.
-Uso: Submit do formulário com ID "formOb".
+Status: LEGADO/SEM USO ATUAL
+Localização prevista: paginas/clientes.php
+Descrição: incrementa um contador manual ao clicar no botão #btn_contador.
+Dependências HTML:
+- #btn_contador
+- #contador
+Situação encontrada: não foram localizados #btn_contador nem #contador no HTML
+atual do projeto.
+Conclusão: função está preservada por histórico da atividade, mas atualmente não
+é usada pela interface.
+Recomendação: manter documentada como função legada, sem remover.
 
 ================================================================================
-7. attContador()
+7. ValideForm(event)
 ================================================================================
-Localização: Contato (contato.php)
-Descrição: Conta e exibe o número de caracteres digitados no campo de mensagem 
-           do formulário em tempo real.
-Uso: Entrada de texto no elemento com ID "txt_mensagem".
+Status: ATIVO
+Localização: paginas/contato.php
+Descrição: valida o formulário de contato antes do envio. Se nome, email,
+assunto, tipo ou mensagem estiverem vazios, impede o submit e mostra alerta.
+Dependências HTML:
+- Formulário: #formOb
+- Campos: #nome, #email, #assunto, #tipo, #txt_mensagem
+- Área de mensagem: #mensagem
+Evento registrado:
+- $("#formOb").submit(ValideForm)
+
+Observação: a validação de servidor também deve continuar existindo no PHP,
+porque a validação JavaScript pode ser burlada.
 
 ================================================================================
-8. BtnTopo()
+8. attContador()
 ================================================================================
-Localização: Global (Todas as páginas)
-Descrição: Gerencia o botão "Voltar ao Topo" que aparece quando o usuário 
-           rola a página para baixo, permitindo voltar ao topo com animação 
-           suave.
-Uso: Automático ao carregar qualquer página com elemento ID "btnTopo".
+Status: ATIVO
+Localização: paginas/contato.php
+Descrição: atualiza em tempo real a contagem de caracteres digitados no campo de
+mensagem.
+Dependências HTML:
+- Campo: #txt_mensagem
+- Contador: #txt_contador
+Evento registrado:
+- $("#txt_mensagem").on("input", attContador)
 
 ================================================================================
-9. carregarComentarios()
+9. BtnTopo()
 ================================================================================
-Localização: Comentários (comentarios.php)
-Descrição: Carrega comentários de um arquivo JSON (js/comentarios.json) e cria 
-           dinamicamente um carrossel interativo.
-Uso: Clique em elemento com ID "btn_comentarios".
+Status: ATIVO GLOBAL
+Localização: partials/footer.php e algumas páginas de autenticação
+Descrição: controla o botão "Voltar ao Topo". O botão fica escondido e aparece
+quando o usuário rola a página até próximo do final. Ao clicar, a página volta ao
+topo com animação.
+Dependência HTML:
+- #btnTopo
+Evento registrado:
+- Scroll da janela
+- Clique em #btnTopo
 
 ================================================================================
 10. ConfigurarGaleria()
 ================================================================================
-Localização: Clientes (clientes.php)
-Descrição: Configura a galeria interativa de imagens, permitindo ampliar as 
-           fotos em um modal ao clicar sobre elas.
-Uso: Clique em elementos com classe "galeria-item".
+Status: ATIVO
+Localização: paginas/clientes.php
+Descrição: abre um modal Bootstrap com a imagem clicada na galeria.
+Dependências HTML:
+- Imagens com classe .galeria-item
+- Modal: #modalGaleria
+- Imagem do modal: #imgModal
+- Título do modal: #modalGaleriaLabel
 
 ================================================================================
-RESUMO DE DEPENDÊNCIAS
+11. ConfigurarAgendamento()
+================================================================================
+Status: ATIVO
+Localização: paginas/consultas.php, paginas/exames.php e paginas/cirurgias.php
+Descrição: configura o modal de agendamento. Ao clicar em um botão de agendar,
+preenche o serviço escolhido. Ao selecionar unidade e data, busca horários
+disponíveis por AJAX.
+Dependências HTML:
+- Botões: .btnAgendar
+- Campos do modal: #servico_id, #servico_nome, #unidade_id,
+  #data_agendamento, #horario, #aviso_horario
+Dependência PHP/JS:
+- Constante global URL_HORARIOS definida em partials/footer.php
+- Endpoint: database/agendamentos/horarios_disponiveis.php
+Retorno esperado do endpoint:
+{
+  "sucesso": true,
+  "mensagem": "",
+  "dados": ["08:00", "09:00"]
+}
+
+Regras atendidas:
+- mostra mensagem se a unidade não atende na data escolhida;
+- mostra "Nenhum horário disponível" quando todos os horários estão ocupados;
+- usa resposta.sucesso, resposta.mensagem e resposta.dados conforme o padrão JSON.
+
+================================================================================
+12. carregarComentarios()
+================================================================================
+Status: REMOVIDA DO JAVASCRIPT ATUAL / LEGADO DOCUMENTAL
+Descrição anterior: carregava comentários a partir de arquivo JSON.
+Situação atual: a função não existe mais em js/meujs.js. Os comentários agora são
+carregados do banco de dados pela página paginas/comentarios.php, usando a função
+listar_comentarios_ativos().
+Conclusão: não deve ser reimplantada, pois o módulo foi migrado para banco de
+dados.
+
+================================================================================
+RESUMO DE FUNÇÕES ATIVAS
+================================================================================
+- cliqueInfo()
+- MouseEntrou() / MouseSaiu()
+- VerDetalhes()
+- ValideForm()
+- attContador()
+- BtnTopo()
+- ConfigurarGaleria()
+- ConfigurarAgendamento()
+
+================================================================================
+FUNÇÕES LEGADAS OU SEM USO ATUAL
+================================================================================
+- BoasVindas(): depende de #welcomeToast, que não foi encontrado no HTML atual.
+- Incrementar(): depende de #btn_contador e #contador, que não foram encontrados.
+- carregarComentarios(): não existe mais no arquivo JS atual; foi substituída por
+  carregamento via banco de dados.
+
+================================================================================
+DEPENDÊNCIAS GERAIS
+================================================================================
+- jQuery: manipulação de DOM, eventos, animação e AJAX.
+- Bootstrap: Toast, Modal e componentes visuais.
+- AdminLTE: layout, sidebar e componentes administrativos.
+- JSON padronizado: usado no endpoint de horários disponíveis, consumido por
+  ConfigurarAgendamento().
+
 ================================================================================
 
-Bootstrap: Modal, Carousel, Toast (CSS/JS)
-jQuery: Manipulação DOM, eventos, AJAX
-JSON: js/comentarios.json (para carrossel de depoimentos)
-
-================================================================================

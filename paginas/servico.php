@@ -81,6 +81,12 @@ require_once __DIR__ . '/../partials/header.php';
                             </div>
                             <!-- /.card -->
                     </div> <!-- /.row -->
+                    <div class="text-center mt-4">
+                        <a href="<?= esc(url_path('paginas/precos.php')) ?>" class="btn btn-success">
+                            <i class="fas fa-tags me-2"></i>
+                            Consultar Tabela de Preços
+                        </a>
+                    </div>
                 </div> <!-- /.container -->
             </div> <!-- /.app-content -->
         </main>

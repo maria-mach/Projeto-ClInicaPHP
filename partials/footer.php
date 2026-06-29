@@ -57,6 +57,10 @@
     const BASE_URL = "<?= esc(url_path('')) ?>";
     </script>
 
+    <script>
+    const URL_HORARIOS = "<?= esc(url_path('database/agendamentos/horarios_disponiveis.php')) ?>";
+    </script>
+    
     <script src="<?= esc(url_path('js/meujs.js')) ?>"></script>
             <!--end::Script-->
     </body>

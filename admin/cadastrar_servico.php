@@ -26,10 +26,7 @@ require_once __DIR__ . '/../partials/header.php';
 
                 <div class="card-body">
 
-                    <form
-                        action="<?= esc(url_path('projeto-upload/salvar.php')) ?>"
-                        method="POST"
-                        enctype="multipart/form-data">
+                   <form action="<?= esc(url_path('database/servicos/cadastrar_servico.php')) ?>" method="POST" enctype="multipart/form-data">
 
                         <div class="mb-3">
                             <label class="form-label">Nome do Serviço</label>
@@ -41,7 +38,22 @@ require_once __DIR__ . '/../partials/header.php';
                                 placeholder="Ex.: Consulta Cardiológica"
                                 required>
                         </div>
+                        <div class="mb-3">
+                            <label for="categoria"class="form-label">Categoria</label>
 
+                            <select
+                                id="categoria"
+                                name="categoria"
+                                class="form-select"
+                                required>
+
+                                <option value="">Selecione...</option>
+                                <option value="consulta">Consulta</option>
+                                <option value="exame">Exame</option>
+                                <option value="cirurgia">Cirurgia</option>
+
+                            </select>
+                        </div>
                         <div class="mb-3">
                             <label class="form-label">Preço</label>
 
@@ -65,15 +77,13 @@ require_once __DIR__ . '/../partials/header.php';
                                 placeholder="Descrição do serviço"
                                 required></textarea>
                         </div>
-
-                        <div class="mb-4">
-                            <label class="form-label">Imagem do Serviço</label>
-
+                        <div class="mb-3">
+                            <label class="form-label">Imagem do serviço</label>
                             <input
                                 type="file"
                                 name="imagem"
                                 class="form-control"
-                                accept=".jpg,.jpeg,.png,.webp"
+                                accept="image/jpeg,image/png,image/webp"
                                 required>
                         </div>
 

@@ -9,9 +9,8 @@ $(document).ready(function () {
   $("#formOb").submit(ValideForm); // Configura a validação do formulário
   $("#txt_mensagem").on("input", attContador); // Configura o contador de caracteres em tempo real
   BtnTopo(); // Inicializa a lógica do botão "Voltar ao Topo"
-  $("#btn_comentarios").click(carregarComentarios); // Configura o carregamento via JSON
   ConfigurarGaleria(); // Configura a galeria interativa na página Clientes
-
+  ConfigurarAgendamento(); // Configura o modal de agendamento
 });
 
 
@@ -58,20 +57,20 @@ function Incrementar() {
   $("#contador").text(contador);
 }
 
-// Valida o formulário antes do envio
 function ValideForm(event) {
-  event.preventDefault(); // Impede o recarregamento da página
-
-  // Obtém os valores e remove espaços em branco extras
   let nome = $("#nome").val().trim();
   let email = $("#email").val().trim();
+  let assunto = $("#assunto").val().trim();
+  let tipo = $("#tipo").val().trim();
+  let mensagem = $("#txt_mensagem").val().trim();
 
-  // Verifica se os campos estão vazios
-  if (nome === "" || email === "") {
-    $("#mensagem").text("Todos os campos devem estar preenchidos!");
-  } else {
-    // Se estiver tudo ok, faz a mensagem de erro sumir suavemente
-    $("#mensagem").fadeOut(1000);
+  if (nome === "" || email === "" || assunto === "" || tipo === "" || mensagem === "") {
+    event.preventDefault();
+
+    $("#mensagem")
+      .removeClass()
+      .addClass("alert alert-danger")
+      .text("Todos os campos devem estar preenchidos!");
   }
 }
 
@@ -101,42 +100,6 @@ function BtnTopo() {
   })
 }
 
-// Função que carrega comentários de um arquivo JSON e monta o carrossel
-function carregarComentarios() {
-  // Usa o jQuery para ler o arquivo JSON de forma simples
-  $.getJSON(BASE_URL + "js/comentarios.json", function (dados) {
-    const $inner = $("#carouselDepoimentos .carousel-inner");
-    $inner.empty(); // Limpa itens antigos
-
-    // Adiciona cada comentário como um item do carrossel
-    dados.forEach((c, i) => {
-      $inner.append(`
-        <div class="carousel-item ${i === 0 ? "active" : ""} text-center">
-          <blockquote class="blockquote">
-            <p>"${c.comentario}"</p>
-            <footer class="blockquote-footer mt-2">${c.autor}</footer>
-          </blockquote>
-        </div>
-      `);
-    });
-
-    // Mostra o carrossel apenas agora que tem conteúdo
-    $("#carrosel").show();
-
-    // Inicializa o componente
-    const carousel = new bootstrap.Carousel("#carouselDepoimentos", {
-      interval: 3000, // Passa sozinho a cada 3 segundos
-      pause: 'hover'  // Pausa se o mouse estiver em cima
-    });
-
-    // Adiciona o clique para passar para o próximo slide
-    $("#carouselDepoimentos").css("cursor", "pointer").click(function() {
-      carousel.next();
-    });
-  }).fail(function () {
-    console.error("Erro ao carregar comentários.");
-  });
-}
 
 // Configura a galeria interativa na página Clientes
 function ConfigurarGaleria() {
@@ -159,4 +122,82 @@ function ConfigurarGaleria() {
       modal.show();
     }
   });
+}
+
+function ConfigurarAgendamento() {
+
+  $(document).on("click", ".btnAgendar", function () {
+
+    $("#servico_id").val($(this).data("id"));
+    $("#servico_nome").val($(this).data("nome"));
+
+    $("#unidade_id").val("");
+    $("#data_agendamento").val("");
+
+    $("#aviso_horario").text("");
+
+    $("#horario").html(
+      '<option value="">Selecione uma unidade e uma data primeiro</option>'
+    );
+
+  });
+
+  $(document).on("change", "#unidade_id, #data_agendamento", function () {
+
+    let unidade = $("#unidade_id").val();
+    let data = $("#data_agendamento").val();
+
+    $("#aviso_horario").text("");
+
+    if (unidade === "" || data === "") {
+      $("#horario").html(
+        '<option value="">Selecione uma unidade e uma data primeiro</option>'
+      );
+      return;
+    }
+
+    $("#horario").html(
+      '<option value="">Carregando horários...</option>'
+    );
+
+    $.get(
+      URL_HORARIOS,
+      {
+        unidade_id: unidade,
+        data_agendamento: data
+      },
+      function (resposta) {
+
+        let html = "";
+
+        if (!resposta.sucesso) {
+          $("#aviso_horario").text(resposta.mensagem);
+
+          html = `<option value="">${resposta.mensagem}</option>`;
+          $("#horario").html(html);
+          return;
+        }
+
+        const horarios = resposta.dados;
+
+        if (horarios.length === 0) {
+          $("#aviso_horario").text("Nenhum horário disponível para esta unidade nesta data.");
+          html = '<option value="">Nenhum horário disponível</option>';
+        } else {
+          $("#aviso_horario").text("");
+          html = '<option value="">Selecione...</option>';
+
+          horarios.forEach(function (hora) {
+            html += `<option value="${hora}">${hora}</option>`;
+          });
+        }
+
+        $("#horario").html(html);
+
+      },
+      "json"
+    );
+
+  });
+
 }

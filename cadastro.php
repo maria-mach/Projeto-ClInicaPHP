@@ -4,6 +4,7 @@ require_once __DIR__ . '/auth/funcs.php';
 iniciar_sessao();
 
 $tituloPagina = 'Clínica Geral | Cadastro';
+$erroCadastro = filter_input(INPUT_GET, 'erro', FILTER_VALIDATE_INT);
 ?>
 
 <!doctype html>
@@ -14,10 +15,6 @@ $tituloPagina = 'Clínica Geral | Cadastro';
     <title><?= esc($tituloPagina) ?></title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <meta name="color-scheme" content="light dark">
-    <meta name="theme-color" content="#007bff" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)">
-    <meta name="supported-color-schemes" content="light dark">
 
     <link rel="preload" href="<?= esc(url_path('css/adminlte.css')) ?>" as="style">
 
@@ -53,10 +50,32 @@ $tituloPagina = 'Clínica Geral | Cadastro';
             <div class="card-body register-card-body">
                 <p class="register-box-msg">Cadastre uma nova conta</p>
 
-                <form action="<?= esc(url_path('auth/cadastrar.php')) ?>" method="post">
+                <?php if ($erroCadastro): ?>
+                    <div class="alert alert-danger">
+                        <?php if ($erroCadastro === 1): ?>
+                            Preencha todos os campos corretamente.
+                        <?php elseif ($erroCadastro === 2): ?>
+                            Este e-mail ou CPF já está cadastrado.
+                        <?php else: ?>
+                            Erro ao cadastrar. Tente novamente.
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
+
+                <form action="<?= esc(url_path('database/usuarios/cadastrar_usuario.php')) ?>" method="post">
                     <div class="input-group mb-3">
                         <input type="text" name="nome" class="form-control" placeholder="Nome completo" required>
                         <div class="input-group-text"><span class="bi bi-person"></span></div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="text" name="cpf" class="form-control" placeholder="CPF" required>
+                        <div class="input-group-text"><span class="bi bi-card-text"></span></div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="text" name="telefone" class="form-control" placeholder="Telefone">
+                        <div class="input-group-text"><span class="bi bi-telephone"></span></div>
                     </div>
 
                     <div class="input-group mb-3">

@@ -11,6 +11,19 @@ function url_path(string $relativePath): string
     return '/ClinicaPHP/' . ltrim($relativePath, '/');
 }
 
+function foto_usuario_url(?string $foto): string
+{
+    $caminhoFoto = $foto ?: 'assets/img/padrao.png';
+    $url = url_path($caminhoFoto);
+    $arquivoFoto = __DIR__ . '/../' . ltrim($caminhoFoto, '/');
+
+    if (is_file($arquivoFoto)) {
+        $url .= '?v=' . filemtime($arquivoFoto);
+    }
+
+    return $url;
+}
+
 function usuario_logado(): bool
 {
     return !empty($_SESSION['usuario_id']);
@@ -22,6 +35,7 @@ function usuario(): array
         'id' => $_SESSION['usuario_id'] ?? null,
         'nome' => $_SESSION['nome'] ?? '',
         'tipo' => $_SESSION['tipo'] ?? '',
+        'foto' => $_SESSION['foto'] ?? '',
     ];
 }
 

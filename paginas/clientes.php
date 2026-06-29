@@ -1,5 +1,10 @@
 <?php
 $tituloPagina = 'Clínica Geral | Clientes';
+
+require_once __DIR__ . '/../database/usuarios/usuario_funcs.php';
+
+$clientes = listar_clientes_destaque();
+
 require_once __DIR__ . '/../partials/header.php';
 ?>
 
@@ -21,24 +26,25 @@ require_once __DIR__ . '/../partials/header.php';
                                     cuidar de sua saúde.</p>
                             </div>
                             <div class="row text-center g-4 mb-5">
+                                <?php foreach ($clientes as $cliente): ?>
                                 <div class="col-md-4">
-                                    <img src="<?= esc(url_path('assets/img/avatar3.png')) ?>" class="rounded-circle mb-3 shadow" width="100"
-                                        alt="Cliente 1">
-                                    <h5>Maria Silva</h5>
-                                    <p class="text-muted small">Paciente desde 2021</p>
-                                </div>
-                                <div class="col-md-4">
-                                    <img src="<?= esc(url_path('assets/img/avatar.png')) ?>" class="rounded-circle mb-3 shadow" width="100"
-                                        alt="Cliente 2">
-                                    <h5>João Rodrigues</h5>
-                                    <p class="text-muted small">Atendimento Corporativo</p>
-                                </div>
-                                <div class="col-md-4">
-                                    <img src="<?= esc(url_path('assets/img/avatar2.png')) ?>" class="rounded-circle mb-3 shadow" width="100"
-                                        alt="Cliente 3">
-                                    <h5>Ana Clara</h5>
-                                    <p class="text-muted small">Saúde da Família</p>
-                                </div>
+
+                                    <img src="<?= esc(foto_usuario_url($cliente['foto'] ?? null)) ?>"
+                                        class="rounded-circle mb-3 shadow"
+                                        width="100"
+                                        height="100"
+                                        style="object-fit: cover;"
+                                        alt="<?= esc($cliente['nome']) ?>">
+
+                                        <h5><?= esc($cliente['nome']) ?></h5>
+
+                                        <p class="text-muted small">
+                                            Paciente da Clínica Geral
+                                        </p>
+
+                                    </div>
+                                <?php endforeach; ?>
+
                             </div>
                             <div class="text-center mt-4 bg-light p-4 rounded border">
                                 <h5 class="text-success mb-3"><i class="fas fa-comments me-2"></i>O que eles dizem sobre
@@ -47,9 +53,11 @@ require_once __DIR__ . '/../partials/header.php';
                                     painel de comentários para ler os depoimentos.</p>
                                 <a href="<?= esc(url_path('paginas/comentarios.php')) ?>" class="btn btn-success"><i
                                         class="fas fa-external-link-alt me-2"></i>Ler Comentários</a>
-                                <p  class="mt-2">Quantidade de clientes: <span id="contador">0</span></p>
-                                <button id="btn_contador" class="btn btn-success"><i
-                                        class="fas fa-external-link-alt me-2"></i>Adicione Clientes</button>
+                                
+                                <p class="mt-4 mb-0">
+                                    <strong>Total de pacientes cadastrados:</strong>
+                                    <?= count($clientes) ?>
+                                </p>
                             </div>
                         </div>
                     </div>

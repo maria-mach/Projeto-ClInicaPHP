@@ -1,0 +1,163 @@
+===========================================================
+CLINICAPHP - DOCUMENTAÇÃO DO PROJETO
+===========================================================
+
+OBJETIVO
+
+Sistema web para gerenciamento de uma clínica médica,
+desenvolvido em PHP, MySQL, Bootstrap, jQuery e AdminLTE.
+
+-----------------------------------------------------------
+PADRÃO DE ORGANIZAÇÃO
+-----------------------------------------------------------
+
+O projeto foi organizado separando responsabilidades em
+pastas específicas.
+
+admin/
+Área administrativa.
+
+cliente/
+Área exclusiva do cliente.
+
+database/
+Responsável pelas regras de negócio e acesso ao banco.
+
+partials/
+Componentes reutilizados.
+
+auth/
+Controle de autenticação e permissões.
+
+helpers/
+Funções auxiliares.
+
+js/
+Scripts JavaScript e jQuery.
+
+-----------------------------------------------------------
+CATEGORIZAÇÃO DAS PÁGINAS
+-----------------------------------------------------------
+
+CRUD
+
+Permite cadastrar, listar, editar e excluir registros.
+
+Exemplos:
+
+- Serviços
+- Unidades
+- Usuários (clientes)
+- Agendamentos
+
+-----------------------------------------------------------
+
+CATÁLOGO COM ATUALIZAÇÃO
+
+Exibe informações ao usuário e permite alterações sem
+remoção direta dos registros.
+
+Exemplos:
+
+- Comentários
+- Perfil do usuário
+
+-----------------------------------------------------------
+
+CATÁLOGO SEM RETIRADA
+
+Permite apenas consulta e cadastro.
+
+Exemplos:
+
+- Contato
+- Agendamento pelo cliente
+
+-----------------------------------------------------------
+
+CATÁLOGO FIXO
+
+Conteúdo institucional.
+
+Exemplos:
+
+- Home
+- Sobre
+- Clientes
+
+-----------------------------------------------------------
+FUNCIONALIDADES IMPLEMENTADAS
+-----------------------------------------------------------
+
+✓ Login
+
+✓ Cadastro
+
+✓ Controle de acesso
+
+✓ Dashboard Administrativo
+
+✓ CRUD de Serviços
+
+✓ CRUD de Unidades
+
+✓ Gerenciamento de Comentários
+
+✓ Upload de imagens dos serviços
+
+✓ Upload da foto do usuário
+
+✓ Agendamento de Consultas
+
+✓ Agendamento de Exames
+
+✓ Agendamento de Cirurgias
+
+✓ Horários automáticos por unidade
+
+✓ Restrições por dias de funcionamento
+
+✓ Controle de horários ocupados
+
+✓ Cancelamento pelo cliente
+
+✓ Gerenciamento de agendamentos pelo administrador
+
+✓ Helpers
+
+✓ Respostas JSON padronizadas
+
+-----------------------------------------------------------
+PADRÃO ADOTADO
+-----------------------------------------------------------
+
+- Separação entre interface e regras de negócio.
+
+- Utilização de partials para componentes reutilizáveis.
+
+- Helpers para funções auxiliares.
+
+- Controllers responsáveis por processar as requisições.
+
+- Respostas AJAX padronizadas utilizando JSON.
+
+Formato:
+
+{
+    "sucesso": true,
+    "mensagem": "",
+    "dados": {}
+}
+
+-----------------------------------------------------------
+JQUERY
+-----------------------------------------------------------
+
+As funções JavaScript encontram-se documentadas no arquivo:
+
+JQUERY.txt
+
+Funções obsoletas ou sem utilização permanecem comentadas
+para preservar o histórico do desenvolvimento.
+
+===========================================================

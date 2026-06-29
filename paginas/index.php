@@ -83,7 +83,7 @@ require_once __DIR__ . '/../partials/header.php';
                                                 <h3>Saúde da Família</h3>
                                                 <p>Cuidamos de todas as idades, oferecendo acompanhamento completo para
                                                     sua família.</p>
-                                                <a href="<?= esc(url_path('paginas/consultas.php')) ?>">
+                                                <a href="<?= esc(url_path('paginas/servico.php')) ?>">
                                                     <button class="btn btn-danger">Explorar serviços</button>
                                                 </a>
                                                 <div class="mt-3">

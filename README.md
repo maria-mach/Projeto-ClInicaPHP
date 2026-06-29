@@ -1,81 +1,211 @@
-# Clínica Geral
+# 🏥 Clínica Geral - Sistema Web
 
-Sistema web desenvolvido para uma clínica médica fictícia, com foco na apresentação de serviços, gerenciamento de usuários e autenticação.
+Sistema desenvolvido em **PHP**, **MySQL**, **Bootstrap 5**, **jQuery** e **AdminLTE**, com foco no gerenciamento de uma clínica médica.
 
-## Tecnologias
+O projeto possui autenticação, controle de usuários, gerenciamento administrativo e sistema de agendamento de consultas, exames e cirurgias.
 
-- PHP
+---
+
+# Tecnologias
+
+- PHP 8+
 - MySQL
+- Bootstrap 5
+- jQuery
+- AdminLTE 4
 - HTML5
 - CSS3
 - JavaScript
-- jQuery
-- Bootstrap 5
-- AdminLTE
 
-## Funcionalidades
+---
 
-- Login e cadastro de usuários
-- Controle de acesso por perfil (Administrador e Cliente)
-- Catálogo de serviços
+# Funcionalidades
+
+## Área Pública
+
+- Página inicial
+- Sobre
+- Serviços
 - Consultas
 - Exames
 - Cirurgias
-- Comentários
+- Unidades
 - Clientes
-- Preços
 - Contato
-- Empresa
-- Local
-- Redes sociais
+- Pesquisa de serviços
+- Comentários aprovados
 
-## Estrutura do Projeto
+---
+
+## Área do Cliente
+
+- Cadastro
+- Login
+- Perfil
+- Agendamento de consultas, exames e cirurgias
+- Cancelamento de agendamentos
+- Visualização dos próprios agendamentos
+
+---
+
+## Área Administrativa
+
+- Dashboard
+- Cadastro de serviços
+- Gerenciamento de serviços
+- Gerenciamento de unidades
+- Gerenciamento de comentários
+- Gerenciamento de agendamentos
+- Controle de acesso por perfil
+
+---
+
+# Sistema de Agendamentos
+
+O sistema realiza automaticamente:
+
+- seleção da unidade;
+- verificação dos dias de funcionamento;
+- verificação do horário de funcionamento;
+- bloqueio de horários já ocupados;
+- liberação automática de horários cancelados ou concluídos;
+- gerenciamento completo pelo administrador.
+
+Status disponíveis:
+
+- Pendente
+- Confirmado
+- Cancelado
+- Concluído
+
+---
+
+# Estrutura do Projeto
 
 ```
 ClinicaPHP/
+
 ├── admin/
-├── assets/
 ├── auth/
 ├── cliente/
-├── css/
+├── config/
 ├── database/
+│   ├── agendamentos/
+│   ├── comentarios/
+│   ├── helpers/
+│   ├── servicos/
+│   ├── unidades/
+│   └── usuarios/
 ├── js/
-├── paginas/
 ├── partials/
-├── index.php
-├── login.php
-└── cadastro.php
+├── paginas/
+├── projeto-upload/
+└── uploads/
 ```
 
-## Banco de Dados
+---
 
-1. Crie um banco de dados chamado:
+# Organização adotada
+
+O projeto foi organizado utilizando separação por responsabilidade.
+
+- **admin/** → funcionalidades administrativas
+- **cliente/** → funcionalidades exclusivas do cliente
+- **database/** → regras de negócio e acesso ao banco
+- **partials/** → componentes reutilizados
+- **auth/** → autenticação e controle de acesso
+- **helpers/** → funções auxiliares
+
+---
+
+# Perfis de Usuário
+
+## Administrador
+
+- gerencia serviços;
+- gerencia unidades;
+- gerencia comentários;
+- gerencia agendamentos.
+
+## Cliente
+
+- realiza agendamentos;
+- consulta seus próprios agendamentos;
+- cancela agendamentos.
+
+---
+
+# Banco de Dados
+
+O banco acompanha o projeto através do arquivo SQL.
+
+Principais tabelas:
+
+- usuarios
+- servicos
+- unidades
+- comentarios
+- agendamentos
+
+---
+
+# Instalação
+
+1. Clone o repositório
 
 ```
-clinica
+git clone <url>
 ```
 
-2. Execute o script SQL disponível no projeto.
-
-3. Configure a conexão em:
-
-```
-database/conexao.php
-```
-
-## Como Executar
-
-1. Copie a pasta **ClinicaPHP** para:
+2. Coloque o projeto dentro do:
 
 ```
 xampp/htdocs/
 ```
 
-2. Inicie o **Apache** e o **MySQL** pelo XAMPP.
+3. Importe o banco de dados.
 
-3. Acesse no navegador:
+4. Configure as credenciais do banco em:
+
+```
+config/database.php
+```
+
+5. Inicie:
+
+- Apache
+- MySQL
+
+6. Acesse:
 
 ```
 http://localhost/ClinicaPHP
 ```
 
+---
+
+# Usuários de Teste
+
+Administrador
+
+```
+E-mail:
+admin@clinica.com
+
+Senha:
+senha123
+```
+
+Cliente
+
+```
+E-mail:
+cliente@clinica.com
+
+Senha:
+senha123
+```
+
+---
+
+Desenvolvido para fins acadêmicos.

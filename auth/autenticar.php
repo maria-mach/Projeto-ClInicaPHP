@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/funcs.php';
-require_once __DIR__ . '/../database/conexao.php';
+require_once __DIR__ . '/../database/usuarios/usuario_funcs.php';
 
 iniciar_sessao();
 
@@ -11,17 +11,15 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 // Valida campos enviados pelo formulário de login.
 $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-$senha = $_POST['senha'] ?? '';
+$senha = trim($_POST['senha'] ?? '');
 
 if (!$email || !$senha) {
     redirecionar(url_path('login.php') . '?erro=1');
 }
 
 // Busca o usuário por email na tabela `usuarios`.
-$sql = 'SELECT id, nome, senha, tipo FROM usuarios WHERE email = :email LIMIT 1';
-$stmt = $conexao->prepare($sql);
-$stmt->execute(['email' => $email]);
-$usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+$usuario = buscar_usuario_por_email($email);
+
 
 $senhaValida = false;
 if ($usuario) {
@@ -33,14 +31,11 @@ if (!$usuario || !$senhaValida) {
     redirecionar(url_path('login.php') . '?erro=1');
 }
 
-$_SESSION['usuario_id'] = $usuario['id'];
-$_SESSION['nome'] = $usuario['nome'];
-$_SESSION['tipo'] = $usuario['tipo'];
-
 // Armazena apenas os dados necessários para o menu e o controle de acesso.
 $_SESSION['usuario_id'] = $usuario['id'];
 $_SESSION['nome'] = $usuario['nome'];
 $_SESSION['tipo'] = $usuario['tipo'];
+$_SESSION['foto'] = $usuario['foto'] ?? 'assets/img/padrao.png';
 
 // Admin vai direto para dashboard; cliente para perfil.
 if ($usuario['tipo'] === 'admin') {
