@@ -90,7 +90,7 @@ require_once __DIR__ . '/../partials/header.php';
 
                             <div class="mt-2">
                                 <img
-                                    <img src="<?= esc(url_path($servico['imagem'])) ?>">
+                                    src="<?= esc(url_path($servico['imagem'])) ?>"
                                     alt="<?= esc($servico['nome']) ?>"
                                     class="img-fluid rounded shadow"
                                     style="max-width: 250px;">

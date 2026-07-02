@@ -1,8 +1,13 @@
 <?php
 require_once __DIR__ . '/../conexao.php';
+require_once __DIR__ . '/../unidades/unidades_funcs.php';
 
-function horarios_padrao(): array
+function horarios_padrao(?int $unidadeId = null): array
 {
+    if ($unidadeId) {
+        return gerar_horarios_unidade($unidadeId);
+    }
+
     return [
         '08:00',
         '09:00',
@@ -13,6 +18,30 @@ function horarios_padrao(): array
         '16:00',
         '17:00'
     ];
+}
+
+function gerar_horarios_unidade(int $unidadeId, int $intervaloMinutos = 60): array
+{
+    $unidade = buscar_unidade_por_id($unidadeId);
+
+    if (!$unidade) {
+        return [];
+    }
+
+    $inicio = strtotime((string) $unidade['hora_inicio']);
+    $fim = strtotime((string) $unidade['hora_fim']);
+
+    if (!$inicio || !$fim || $inicio > $fim) {
+        return [];
+    }
+
+    $horarios = [];
+
+    for ($horario = $inicio; $horario <= $fim; $horario += $intervaloMinutos * 60) {
+        $horarios[] = date('H:i', $horario);
+    }
+
+    return $horarios;
 }
 
 function listar_horarios_ocupados(int $unidadeId, string $data): array
@@ -37,7 +66,7 @@ function listar_horarios_ocupados(int $unidadeId, string $data): array
 
 function listar_horarios_disponiveis(int $unidadeId, string $data): array
 {
-    $horariosPadrao = horarios_padrao();
+    $horariosPadrao = horarios_padrao($unidadeId);
     $horariosOcupados = listar_horarios_ocupados($unidadeId, $data);
 
     return array_values(array_diff($horariosPadrao, $horariosOcupados));
@@ -52,20 +81,64 @@ function inserir_agendamento(
 ): bool {
     global $conexao;
 
-    $sql = "INSERT INTO agendamentos
-            (usuario_id, servico_id, unidade_id, data_agendamento, horario, status)
-            VALUES
-            (:usuario_id, :servico_id, :unidade_id, :data_agendamento, :horario, 'confirmado')";
+    $sqlInserir = "INSERT INTO agendamentos
+                   (usuario_id, servico_id, unidade_id, data_agendamento, horario, status)
+                   VALUES
+                   (:usuario_id, :servico_id, :unidade_id, :data_agendamento, :horario, 'confirmado')";
 
-    $stmt = $conexao->prepare($sql);
+    $stmtInserir = $conexao->prepare($sqlInserir);
 
-    return $stmt->execute([
-        'usuario_id' => $usuarioId,
-        'servico_id' => $servicoId,
+    try {
+        return $stmtInserir->execute([
+            'usuario_id' => $usuarioId,
+            'servico_id' => $servicoId,
+            'unidade_id' => $unidadeId,
+            'data_agendamento' => $data,
+            'horario' => $horario
+        ]);
+    } catch (PDOException $e) {
+        $codigoMysql = (int) ($e->errorInfo[1] ?? 0);
+
+        if ($codigoMysql !== 1062) {
+            throw $e;
+        }
+    }
+
+    $sqlCancelado = "SELECT id
+                     FROM agendamentos
+                     WHERE unidade_id = :unidade_id
+                     AND data_agendamento = :data_agendamento
+                     AND horario = :horario
+                     AND status = 'cancelado'
+                     LIMIT 1";
+
+    $stmtCancelado = $conexao->prepare($sqlCancelado);
+    $stmtCancelado->execute([
         'unidade_id' => $unidadeId,
         'data_agendamento' => $data,
         'horario' => $horario
     ]);
+
+    $agendamentoCanceladoId = $stmtCancelado->fetchColumn();
+
+    if ($agendamentoCanceladoId) {
+        $sqlReativar = "UPDATE agendamentos
+                        SET usuario_id = :usuario_id,
+                            servico_id = :servico_id,
+                            status = 'confirmado',
+                            criado_em = CURRENT_TIMESTAMP
+                        WHERE id = :id";
+
+        $stmtReativar = $conexao->prepare($sqlReativar);
+
+        return $stmtReativar->execute([
+            'id' => $agendamentoCanceladoId,
+            'usuario_id' => $usuarioId,
+            'servico_id' => $servicoId
+        ]);
+    }
+
+    return false;
 }
 
 function listar_agendamentos_por_usuario(int $usuarioId): array

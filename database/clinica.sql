@@ -157,11 +157,9 @@ CREATE TABLE agendamentos (
     status ENUM('pendente', 'confirmado', 'cancelado', 'concluido') NOT NULL DEFAULT 'confirmado',
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
     FOREIGN KEY (servico_id) REFERENCES servicos(id),
-    FOREIGN KEY (unidade_id) REFERENCES unidades(id),
-
-    UNIQUE KEY unico_agendamento (unidade_id, data_agendamento, horario)
+    FOREIGN KEY (unidade_id) REFERENCES unidades(id)
 );
 
 

@@ -43,7 +43,11 @@ require_once __DIR__ . '/../partials/header.php';
 
                     <?php if (isset($_GET['erro'])): ?>
                         <div class="alert alert-danger">
-                            Erro ao atualizar os dados.
+                            <?php if ((int) $_GET['erro'] === 3): ?>
+                                Não foi possível excluir sua conta. Tente novamente.
+                            <?php else: ?>
+                                Erro ao atualizar os dados.
+                            <?php endif; ?>
                         </div>
                     <?php endif; ?>
 

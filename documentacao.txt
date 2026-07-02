@@ -1,163 +1,673 @@
-===========================================================
-CLINICAPHP - DOCUMENTAÇÃO DO PROJETO
-===========================================================
+================================================================================
+                 DOCUMENTAÇÃO DAS FUNÇÕES JQUERY NO PROJETO
+================================================================================
 
-OBJETIVO
+Arquivo analisado: js/meujs.js
+Projeto: ClinicaPHP
+Observação: nenhuma função foi excluída. As funções sem uso atual foram apenas
+marcadas como "LEGADO/SEM USO ATUAL" para revisão futura.
 
-Sistema web para gerenciamento de uma clínica médica,
-desenvolvido em PHP, MySQL, Bootstrap, jQuery e AdminLTE.
+================================================================================
+1. $(document).ready(...)
+================================================================================
+Status: ATIVO
+Descrição: ponto inicial do JavaScript. Registra os eventos das funções abaixo
+quando a página termina de carregar.
+Funções chamadas:
+- boasVindas()
+- cliqueInfo()
+- MouseEntrou() / MouseSaiu()
+- VerDetalhes()
+- Incrementar()
+- ValideForm()
+- attContador()
+- BtnTopo()
+- ConfigurarGaleria()
+- ConfigurarAgendamento()
 
------------------------------------------------------------
-PADRÃO DE ORGANIZAÇÃO
------------------------------------------------------------
+Observação: algumas chamadas não causam erro mesmo quando o seletor não existe,
+pois o jQuery simplesmente não encontra elementos correspondentes.
 
-O projeto foi organizado separando responsabilidades em
-pastas específicas.
+================================================================================
+2. boasVindas()
+================================================================================
+Status: LEGADO/SEM USO ATUAL VISÍVEL
+Local previsto: Home (index.php / paginas/index.php)
+Descrição: deveria exibir um Toast de boas-vindas quando a página inicial fosse
+aberta.
+Dependência HTML: elemento com ID "welcomeToast".
+Situação encontrada: o elemento "welcomeToast" está em paginas/index.php.
+Portanto, a função exibe o Toast de boas-vindas ao abrir a página inicial.
 
-admin/
-Área administrativa.
+================================================================================
+3. cliqueInfo()
+================================================================================
+Status: ATIVO
+Localização: paginas/empresa.php
+Descrição: mostra ou oculta o parágrafo extra de informações da clínica.
+Dependências HTML:
+- Botão: #infoClick
+- Conteúdo: #infoMostrar
+Evento registrado:
+- $("#infoClick").click(cliqueInfo)
 
-cliente/
-Área exclusiva do cliente.
+================================================================================
+4. MouseEntrou() / MouseSaiu()
+================================================================================
+Status: ATIVO
+Localização: paginas/servico.php
+Descrição: muda a cor de fundo dos cards com classe "cdhover" ao passar o mouse.
+Dependência HTML:
+- Elementos com classe .cdhover
+Evento registrado:
+- $(".cdhover").hover(MouseEntrou, MouseSaiu)
 
-database/
-Responsável pelas regras de negócio e acesso ao banco.
+Observação: a função altera a cor por JavaScript. Se quiser separar melhor
+responsabilidades, esse efeito poderia ser migrado futuramente para CSS (:hover),
+mas não é necessário agora.
 
-partials/
-Componentes reutilizados.
+================================================================================
+5. VerDetalhes()
+================================================================================
+Status: ATIVO
+Localização: paginas/detalhes.php
+Descrição: exibe/oculta blocos de detalhes com animação slideToggle(). Usa o
+atributo data-target para decidir qual seção abrir.
+Dependência HTML:
+- Botões com classe .btn-ver-detalhes
+- Seções com IDs indicados em data-target
+Evento registrado:
+- $(".btn-ver-detalhes").click(VerDetalhes)
 
-auth/
-Controle de autenticação e permissões.
+================================================================================
+6. Incrementar()
+================================================================================
+Status: LEGADO/SEM USO ATUAL
+Localização prevista: paginas/clientes.php
+Descrição: incrementa um contador manual ao clicar no botão #btn_contador.
+Dependências HTML:
+- #btn_contador
+- #contador
+Situação encontrada: não foram localizados #btn_contador nem #contador no HTML
+atual do projeto.
+Conclusão: função está preservada por histórico da atividade, mas atualmente não
+é usada pela interface.
+Recomendação: manter documentada como função legada, sem remover.
 
-helpers/
-Funções auxiliares.
+================================================================================
+7. ValideForm(event)
+================================================================================
+Status: ATIVO
+Localização: paginas/contato.php
+Descrição: valida o formulário de contato antes do envio. Se nome, email,
+assunto, tipo ou mensagem estiverem vazios, impede o submit e mostra alerta.
+Dependências HTML:
+- Formulário: #formOb
+- Campos: #nome, #email, #assunto, #tipo, #txt_mensagem
+- Área de mensagem: #mensagem
+Evento registrado:
+- $("#formOb").submit(ValideForm)
 
-js/
-Scripts JavaScript e jQuery.
+Observação: a validação de servidor também deve continuar existindo no PHP,
+porque a validação JavaScript pode ser burlada.
 
------------------------------------------------------------
-CATEGORIZAÇÃO DAS PÁGINAS
------------------------------------------------------------
+================================================================================
+8. attContador()
+================================================================================
+Status: ATIVO
+Localização: paginas/contato.php
+Descrição: atualiza em tempo real a contagem de caracteres digitados no campo de
+mensagem.
+Dependências HTML:
+- Campo: #txt_mensagem
+- Contador: #txt_contador
+Evento registrado:
+- $("#txt_mensagem").on("input", attContador)
 
-CRUD
+================================================================================
+9. BtnTopo()
+================================================================================
+Status: ATIVO GLOBAL
+Localização: partials/footer.php e algumas páginas de autenticação
+Descrição: controla o botão "Voltar ao Topo". O botão fica escondido e aparece
+quando o usuário rola a página até próximo do final. Ao clicar, a página volta ao
+topo com animação.
+Dependência HTML:
+- #btnTopo
+Evento registrado:
+- Scroll da janela
+- Clique em #btnTopo
 
-Permite cadastrar, listar, editar e excluir registros.
+================================================================================
+10. ConfigurarGaleria()
+================================================================================
+Status: ATIVO
+Localização: paginas/clientes.php
+Descrição: abre um modal Bootstrap com a imagem clicada na galeria.
+Dependências HTML:
+- Imagens com classe .galeria-item
+- Modal: #modalGaleria
+- Imagem do modal: #imgModal
+- Título do modal: #modalGaleriaLabel
 
-Exemplos:
-
-- Serviços
-- Unidades
-- Usuários (clientes)
-- Agendamentos
-
------------------------------------------------------------
-
-CATÁLOGO COM ATUALIZAÇÃO
-
-Exibe informações ao usuário e permite alterações sem
-remoção direta dos registros.
-
-Exemplos:
-
-- Comentários
-- Perfil do usuário
-
------------------------------------------------------------
-
-CATÁLOGO SEM RETIRADA
-
-Permite apenas consulta e cadastro.
-
-Exemplos:
-
-- Contato
-- Agendamento pelo cliente
-
------------------------------------------------------------
-
-CATÁLOGO FIXO
-
-Conteúdo institucional.
-
-Exemplos:
-
-- Home
-- Sobre
-- Clientes
-
------------------------------------------------------------
-FUNCIONALIDADES IMPLEMENTADAS
------------------------------------------------------------
-
-✓ Login
-
-✓ Cadastro
-
-✓ Controle de acesso
-
-✓ Dashboard Administrativo
-
-✓ CRUD de Serviços
-
-✓ CRUD de Unidades
-
-✓ Gerenciamento de Comentários
-
-✓ Upload de imagens dos serviços
-
-✓ Upload da foto do usuário
-
-✓ Agendamento de Consultas
-
-✓ Agendamento de Exames
-
-✓ Agendamento de Cirurgias
-
-✓ Horários automáticos por unidade
-
-✓ Restrições por dias de funcionamento
-
-✓ Controle de horários ocupados
-
-✓ Cancelamento pelo cliente
-
-✓ Gerenciamento de agendamentos pelo administrador
-
-✓ Helpers
-
-✓ Respostas JSON padronizadas
-
------------------------------------------------------------
-PADRÃO ADOTADO
------------------------------------------------------------
-
-- Separação entre interface e regras de negócio.
-
-- Utilização de partials para componentes reutilizáveis.
-
-- Helpers para funções auxiliares.
-
-- Controllers responsáveis por processar as requisições.
-
-- Respostas AJAX padronizadas utilizando JSON.
-
-Formato:
-
+================================================================================
+11. ConfigurarAgendamento()
+================================================================================
+Status: ATIVO
+Localização: paginas/consultas.php, paginas/exames.php e paginas/cirurgias.php
+Descrição: configura o modal de agendamento. Ao clicar em um botão de agendar,
+preenche o serviço escolhido. Ao selecionar unidade e data, busca horários
+disponíveis por AJAX.
+Dependências HTML:
+- Botões: .btnAgendar
+- Campos do modal: #servico_id, #servico_nome, #unidade_id,
+  #data_agendamento, #horario, #aviso_horario
+Dependência PHP/JS:
+- Constante global URL_HORARIOS definida em partials/footer.php
+- Endpoint: database/agendamentos/horarios_disponiveis.php
+Retorno esperado do endpoint:
 {
-    "sucesso": true,
-    "mensagem": "",
-    "dados": {}
+  "sucesso": true,
+  "mensagem": "",
+  "dados": ["08:00", "09:00"]
 }
 
------------------------------------------------------------
-JQUERY
------------------------------------------------------------
+Regras atendidas:
+- mostra mensagem se a unidade não atende na data escolhida;
+- mostra "Nenhum horário disponível" quando todos os horários estão ocupados;
+- usa resposta.sucesso, resposta.mensagem e resposta.dados conforme o padrão JSON.
 
-As funções JavaScript encontram-se documentadas no arquivo:
+================================================================================
+12. carregarComentarios()
+================================================================================
+Status: REMOVIDA DO JAVASCRIPT ATUAL / LEGADO DOCUMENTAL
+Descrição anterior: carregava comentários a partir de arquivo JSON.
+Situação atual: a função não existe mais em js/meujs.js. Os comentários agora são
+carregados do banco de dados pela página paginas/comentarios.php, usando a função
+listar_comentarios_ativos().
+Conclusão: não deve ser reimplantada, pois o módulo foi migrado para banco de
+dados.
 
-JQUERY.txt
+================================================================================
+RESUMO DE FUNÇÕES ATIVAS
+================================================================================
+- boasVindas()
+- cliqueInfo()
+- MouseEntrou() / MouseSaiu()
+- VerDetalhes()
+- ValideForm()
+- attContador()
+- BtnTopo()
+- ConfigurarGaleria()
+- ConfigurarAgendamento()
 
-Funções obsoletas ou sem utilização permanecem comentadas
-para preservar o histórico do desenvolvimento.
+================================================================================
+FUNÇÕES LEGADAS OU SEM USO ATUAL
+================================================================================
+- Incrementar(): depende de #btn_contador e #contador, que não foram encontrados.
+- carregarComentarios(): não existe mais no arquivo JS atual; foi substituída por
+  carregamento via banco de dados.
 
-===========================================================
+================================================================================
+DEPENDÊNCIAS GERAIS
+================================================================================
+- jQuery: manipulação de DOM, eventos, animação e AJAX.
+- Bootstrap: Toast, Modal e componentes visuais.
+- AdminLTE: layout, sidebar e componentes administrativos.
+- JSON padronizado: usado no endpoint de horários disponíveis, consumido por
+  ConfigurarAgendamento().
+
+================================================================================
+DOCUMENTAÇÃO DOS CRUDS E CATÁLOGOS DO PROJETO
+================================================================================
+
+1. Cadastro / CRUD de usuários
+--------------------------------------------------------------------------------
+Páginas:
+- cadastro.php
+- cliente/perfil.php
+
+Processamento:
+- database/usuarios/cadastrar_usuario.php
+- database/usuarios/atualizar_usuario.php
+- database/usuarios/excluir_usuario.php
+- database/usuarios/usuario_funcs.php
+
+Tabela:
+- usuarios
+
+Classificação:
+- CRUD.
+
+Como funciona:
+- O cadastro cria usuários do tipo cliente.
+- O perfil permite consultar e alterar dados do usuário, endereço e foto.
+- A exclusão da conta remove o usuário e os agendamentos vinculados.
+- O CPF e o e-mail são únicos e validados antes da inserção.
+
+2. Login / Fixo
+--------------------------------------------------------------------------------
+Páginas:
+- login.php
+
+Processamento:
+- auth/autenticar.php
+- auth/logout.php
+- auth/funcs.php
+
+Classificação:
+- Fixo.
+
+Como funciona:
+- Serve como tela de autenticação.
+- Não é um catálogo e não possui manutenção de conteúdo.
+- Apenas valida usuário/senha e cria ou encerra sessão.
+
+3. Clientes / Catálogo sem retirada
+--------------------------------------------------------------------------------
+Páginas:
+- paginas/clientes.php
+
+Fonte de dados:
+- database/usuarios/usuario_funcs.php
+- Função listar_clientes_destaque()
+
+Classificação:
+- Catálogo sem retirada.
+
+Como funciona:
+- Mostra pacientes cadastrados do tipo cliente.
+- Exibe nome e foto vindos do banco.
+- Mostra contador dos clientes exibidos na página.
+- Mantém a galeria fixa de imagens institucionais.
+- Não existe retirada manual nessa página; ela apenas exibe dados.
+
+4. Comentários / Catálogo com atualização
+--------------------------------------------------------------------------------
+Páginas públicas:
+- paginas/comentarios.php
+- paginas/contato.php
+
+Área administrativa:
+- admin/comentarios.php
+
+Processamento:
+- database/comentarios/cadastrar_comentario.php
+- database/comentarios/alterar_status_comentario.php
+- database/comentarios/comentarios_funcs.php
+
+Tabela:
+- comentarios
+
+Classificação:
+- Catálogo com atualização.
+
+Como funciona:
+- Visitantes adicionam comentários, dúvidas ou sugestões pelo formulário de contato.
+- O administrador consulta e altera o status dos comentários.
+- A página pública exibe comentários permitidos pela consulta do banco.
+- A retirada não é pública; a manutenção é feita por status.
+
+5. Consultas / Catálogo com atualização
+--------------------------------------------------------------------------------
+Páginas:
+- paginas/consultas.php
+
+Fonte de dados:
+- Tabela servicos
+- Categoria consulta
+- database/servicos/servicos_funcs.php
+
+Classificação:
+- Catálogo com atualização.
+
+Como funciona:
+- Lista serviços ativos da categoria consulta.
+- Nome, descrição, imagem e preço vêm do banco.
+- A manutenção acontece no CRUD administrativo de serviços.
+
+6. Exames / Catálogo com atualização
+--------------------------------------------------------------------------------
+Páginas:
+- paginas/exames.php
+
+Fonte de dados:
+- Tabela servicos
+- Categoria exame
+- database/servicos/servicos_funcs.php
+
+Classificação:
+- Catálogo com atualização.
+
+Como funciona:
+- Lista serviços ativos da categoria exame.
+- Nome, descrição, imagem e preço vêm do banco.
+- A manutenção acontece no CRUD administrativo de serviços.
+
+7. Cirurgias / Catálogo com atualização
+--------------------------------------------------------------------------------
+Páginas:
+- paginas/cirurgias.php
+
+Fonte de dados:
+- Tabela servicos
+- Categoria cirurgia
+- database/servicos/servicos_funcs.php
+
+Classificação:
+- Catálogo com atualização.
+
+Como funciona:
+- Lista serviços ativos da categoria cirurgia.
+- Nome, descrição, imagem e preço vêm do banco.
+- A manutenção acontece no CRUD administrativo de serviços.
+
+8. Preços / Catálogo com atualização
+--------------------------------------------------------------------------------
+Páginas:
+- paginas/precos.php
+
+Fonte de dados:
+- Tabela servicos
+- Função listar_servicos_ativos()
+
+Classificação:
+- Catálogo com atualização.
+
+Como funciona:
+- Exibe todos os serviços ativos com seus preços.
+- Quando o administrador altera o preço no CRUD de serviços, a tabela de preços
+  pública acompanha a atualização.
+
+9. Serviço / Catálogo sem retirada
+--------------------------------------------------------------------------------
+Páginas:
+- paginas/servico.php
+
+Classificação:
+- Catálogo sem retirada.
+
+Como funciona:
+- Funciona como uma vitrine/navegação para Consultas, Exames e Cirurgias.
+- O serviço pode deixar de ser oferecido pelo status inativo no CRUD de serviços.
+- O registro não é excluído fisicamente, para preservar histórico e relação com
+  agendamentos.
+
+10. Detalhes / Catálogo sem retirada
+--------------------------------------------------------------------------------
+Páginas:
+- paginas/detalhes.php
+
+Classificação:
+- Catálogo sem retirada.
+
+Como funciona:
+- Está interligado com paginas/servico.php.
+- Mostra blocos de detalhes para consultas, exames e cirurgias.
+- Os textos e imagens são institucionais.
+- Os preços "a partir de" vêm do menor preço ativo cadastrado no banco por
+  categoria.
+
+11. Empresa / Fixo
+--------------------------------------------------------------------------------
+Páginas:
+- paginas/empresa.php
+
+Classificação:
+- Fixo.
+
+Como funciona:
+- Mostra informações institucionais da empresa.
+- Não há manutenção frequente nem CRUD próprio.
+
+12. Contato / Fixo nas informações e CRUD na mensagem
+--------------------------------------------------------------------------------
+Páginas:
+- paginas/contato.php
+
+Processamento:
+- database/comentarios/cadastrar_comentario.php
+- admin/comentarios.php
+- database/comentarios/alterar_status_comentario.php
+
+Classificação:
+- Fixo nas informações.
+- CRUD na mensagem.
+
+Como funciona:
+- Telefone, WhatsApp, e-mail e Instagram são informações fixas.
+- O formulário cria mensagens na tabela comentarios.
+- A administração consulta e altera status dessas mensagens.
+- A resposta formal pode ser expandida futuramente, mas a base de criação,
+  consulta e moderação já existe.
+
+13. Redes_Sociais / Fixo
+--------------------------------------------------------------------------------
+Página:
+- paginas/redes_sociais.php
+
+Classificação:
+- Fixo.
+
+Como funciona:
+- Existe uma página própria para redes sociais.
+- Os links e nomes das redes estão escritos diretamente no HTML da página.
+- Não há manutenção frequente nem CRUD próprio.
+
+14. Index/Home / Fixo
+--------------------------------------------------------------------------------
+Páginas:
+- paginas/index.php
+
+Classificação:
+- Fixo.
+
+Como funciona:
+- Mostra conteúdo inicial, carrossel e chamada para áreas do site.
+- Não há manutenção frequente nem CRUD próprio.
+- O toast boasVindas() aparece na home usando o elemento #welcomeToast.
+
+15. Local / Catálogo com atualização
+--------------------------------------------------------------------------------
+Páginas:
+- paginas/local.php
+
+Área administrativa:
+- admin/unidades.php
+- admin/cadastrar_unidade.php
+- admin/editar_unidade.php
+
+Processamento:
+- database/unidades/cadastrar_unidade.php
+- database/unidades/atualizar_unidade.php
+- database/unidades/alterar_status_unidade.php
+- database/unidades/unidades_funcs.php
+
+Tabela:
+- unidades
+
+Classificação:
+- Catálogo com atualização.
+
+Como funciona:
+- O administrador pode adicionar e atualizar unidades.
+- Uma unidade pode ser ativada ou inativada.
+- A página pública mostra apenas unidades ativas.
+- O horário exibido é calculado por dias_funcionamento, hora_inicio e hora_fim.
+
+================================================================================
+CRUD ADMINISTRATIVO DE SERVIÇOS
+================================================================================
+Este bloco explica o CRUD que alimenta Consultas, Exames, Cirurgias, Preços,
+Serviço e Detalhes.
+
+CRUD de Serviços / Catálogo com atualização
+--------------------------------------------------------------------------------
+Área administrativa:
+- admin/servicos.php
+- admin/cadastrar_servico.php
+- admin/editar_servico.php
+
+Processamento:
+- database/servicos/cadastrar_servicos.php
+- database/servicos/atualizar_servico.php
+- database/servicos/alterar_status_servico.php
+- database/servicos/servicos_funcs.php
+
+Tabela:
+- servicos
+
+Como funciona:
+- O administrador cadastra nome, categoria, descrição, preço e imagem.
+- O administrador edita esses dados em admin/editar_servico.php.
+- Não há exclusão física pelo painel; o botão altera status entre ativo e inativo.
+- As páginas públicas usam apenas serviços ativos.
+- Os preços exibidos nas páginas vêm do campo servicos.preco.
+
+Páginas que usam este catálogo atualizado pelo banco:
+- paginas/precos.php lista todos os serviços ativos com preço do banco.
+- paginas/consultas.php lista serviços ativos da categoria consulta.
+- paginas/exames.php lista serviços ativos da categoria exame.
+- paginas/cirurgias.php lista serviços ativos da categoria cirurgia.
+- paginas/detalhes.php mostra valores "a partir de" calculados pelo menor preço
+  ativo de cada categoria.
+
+================================================================================
+CRUD ADMINISTRATIVO DE UNIDADES
+================================================================================
+
+CRUD de Unidades / Catálogo com atualização
+--------------------------------------------------------------------------------
+Área administrativa:
+- admin/unidades.php
+- admin/cadastrar_unidade.php
+- admin/editar_unidade.php
+
+Processamento:
+- database/unidades/cadastrar_unidade.php
+- database/unidades/atualizar_unidade.php
+- database/unidades/alterar_status_unidade.php
+- database/unidades/unidades_funcs.php
+
+Tabela:
+- unidades
+
+Como funciona:
+- O administrador cadastra e edita nome, endereço, telefone, dias de
+  funcionamento, hora de início e hora de fim.
+- Não há exclusão física pelo painel; o botão altera status entre ativo e inativo.
+- paginas/local.php exibe apenas unidades ativas.
+- A informação visual de horário é gerada por horario_exibicao_unidade(), usando
+  dias_funcionamento, hora_inicio e hora_fim. Assim, quando a unidade é editada,
+  a página pública acompanha a atualização.
+
+================================================================================
+CRUD OPERACIONAL DE AGENDAMENTOS
+================================================================================
+
+CRUD de Agendamentos / Catálogo operacional sem retirada
+--------------------------------------------------------------------------------
+Área do cliente:
+- cliente/meus_agendamentos.php
+- partials/modal_agendamento.php
+
+Área administrativa:
+- admin/agendamentos.php
+
+Processamento:
+- database/agendamentos/cadastrar_agendamento.php
+- database/agendamentos/cancelar_agendamento.php
+- database/agendamentos/alterar_status_agendamento.php
+- database/agendamentos/horarios_disponiveis.php
+- database/agendamentos/agendamentos_funcs.php
+
+Tabela:
+- agendamentos
+
+Como funciona:
+- O cliente cria agendamentos a partir das páginas de consulta, exame ou cirurgia.
+- O cliente pode cancelar agendamentos pendentes ou confirmados.
+- O administrador pode confirmar, concluir ou cancelar.
+- Não há retirada/exclusão manual pelo painel; o histórico permanece com status.
+- Horários com status pendente ou confirmado ficam ocupados.
+- Horários cancelados voltam a ficar disponíveis.
+- A lista de horários disponíveis respeita unidade, data, dias de funcionamento,
+  hora_inicio, hora_fim e agendamentos já ocupados.
+
+================================================================================
+CRUD OPERACIONAL DE COMENTÁRIOS
+================================================================================
+
+CRUD de Comentários / Catálogo com atualização
+--------------------------------------------------------------------------------
+Páginas públicas:
+- paginas/comentarios.php
+
+Área administrativa:
+- admin/comentarios.php
+
+Processamento:
+- database/comentarios/cadastrar_comentario.php
+- database/comentarios/alterar_status_comentario.php
+- database/comentarios/comentarios_funcs.php
+
+Tabela:
+- comentarios
+
+Como funciona:
+- Visitantes enviam comentários pela página pública.
+- O administrador muda o status para pendente, aprovado, respondido ou arquivado.
+- A página pública mostra apenas comentários aprovados/respondidos conforme a
+  consulta do banco.
+- Não há retirada/exclusão pública; a moderação é feita por status.
+
+================================================================================
+CRUD DE USUÁRIO / PERFIL
+================================================================================
+
+CRUD de Usuário / Perfil com atualização
+--------------------------------------------------------------------------------
+Páginas:
+- cadastro.php
+- login.php
+- cliente/perfil.php
+
+Processamento:
+- auth/autenticar.php
+- auth/logout.php
+- database/usuarios/cadastrar_usuario.php
+- database/usuarios/atualizar_usuario.php
+- database/usuarios/excluir_usuario.php
+- database/usuarios/usuario_funcs.php
+
+Tabela:
+- usuarios
+
+Como funciona:
+- O cadastro cria usuário cliente.
+- O login salva id, nome, tipo e foto na sessão.
+- O perfil atualiza dados pessoais, endereço e foto.
+- A foto atualizada aparece no perfil, no header e em paginas/clientes.php.
+- A exclusão da conta remove o usuário e os agendamentos vinculados, evitando erro
+  de chave estrangeira.
+
+================================================================================
+CATÁLOGO FIXO / SEM CRUD PRÓPRIO
+================================================================================
+
+Catálogo fixo
+--------------------------------------------------------------------------------
+Páginas com estrutura predominantemente fixa:
+- paginas/servico.php
+- partes institucionais de paginas/detalhes.php
+- imagens e blocos editoriais da home
+- paginas/empresa.php
+- informações fixas de paginas/contato.php
+
+Como funciona:
+- Esses blocos servem como navegação e apresentação institucional.
+- Eles não representam CRUD próprio.
+- Quando mostram preço ou disponibilidade de serviço, devem consultar funções do
+  banco em vez de manter valores fixos digitados no HTML.
+
+================================================================================

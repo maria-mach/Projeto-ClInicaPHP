@@ -7,6 +7,16 @@ require_once __DIR__ . '/../partials/header.php';
             <div class="app-content mt-4">
 
                 <div class="container">
+                    <div class="toast-container position-fixed top-0 end-0 p-3">
+                        <div id="welcomeToast" class="toast text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="d-flex">
+                                <div class="toast-body">
+                                    Bem-vindo à Clínica Geral!
+                                </div>
+                                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Fechar"></button>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="row mb-4">
                         <div class="col-12">

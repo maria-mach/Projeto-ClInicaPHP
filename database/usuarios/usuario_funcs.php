@@ -140,11 +140,25 @@ function excluir_usuario(int $id): bool
 {
     global $conexao;
 
-    $sql = 'DELETE FROM usuarios WHERE id = :id';
+    try {
+        $conexao->beginTransaction();
 
-    $stmt = $conexao->prepare($sql);
+        $stmtAgendamentos = $conexao->prepare('DELETE FROM agendamentos WHERE usuario_id = :id');
+        $stmtAgendamentos->execute(['id' => $id]);
 
-    return $stmt->execute(['id' => $id]);
+        $stmtUsuario = $conexao->prepare('DELETE FROM usuarios WHERE id = :id');
+        $excluiu = $stmtUsuario->execute(['id' => $id]);
+
+        $conexao->commit();
+
+        return $excluiu;
+    } catch (PDOException $e) {
+        if ($conexao->inTransaction()) {
+            $conexao->rollBack();
+        }
+
+        return false;
+    }
 }
 
 function buscar_usuario_por_cpf(string $cpf): ?array

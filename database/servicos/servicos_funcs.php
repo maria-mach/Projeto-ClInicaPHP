@@ -68,6 +68,36 @@ function nome_categoria(string $categoria): string
     };
 }
 
+function menor_preco_servico_por_categoria(string $categoria): ?float
+{
+    global $conexao;
+
+    $sql = "SELECT MIN(preco) AS menor_preco
+            FROM servicos
+            WHERE status = 'ativo'
+            AND categoria = :categoria";
+
+    $stmt = $conexao->prepare($sql);
+    $stmt->execute([
+        'categoria' => $categoria
+    ]);
+
+    $menorPreco = $stmt->fetchColumn();
+
+    return $menorPreco !== null ? (float) $menorPreco : null;
+}
+
+function preco_a_partir_de(string $categoria): string
+{
+    $menorPreco = menor_preco_servico_por_categoria($categoria);
+
+    if ($menorPreco === null) {
+        return 'Consulte a clínica';
+    }
+
+    return 'R$ ' . number_format($menorPreco, 2, ',', '.');
+}
+
 function listar_todos_servicos(): array
 {
     global $conexao;

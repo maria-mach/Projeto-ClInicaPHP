@@ -1,6 +1,68 @@
 <?php
 require_once __DIR__ . '/../conexao.php';
 
+function nomes_dias_funcionamento(string $diasFuncionamento): string
+{
+    $nomesDias = [
+        '1' => 'Segunda',
+        '2' => 'Terça',
+        '3' => 'Quarta',
+        '4' => 'Quinta',
+        '5' => 'Sexta',
+        '6' => 'Sábado',
+        '7' => 'Domingo'
+    ];
+
+    $dias = array_values(array_filter(array_map('trim', explode(',', $diasFuncionamento))));
+
+    if ($dias === ['1', '2', '3', '4', '5']) {
+        return 'Segunda a sexta';
+    }
+
+    if ($dias === ['1', '2', '3', '4', '5', '6']) {
+        return 'Segunda a sábado';
+    }
+
+    if ($dias === ['1', '2', '3', '4', '5', '6', '7']) {
+        return 'Todos os dias';
+    }
+
+    $diasFormatados = [];
+
+    foreach ($dias as $dia) {
+        if (isset($nomesDias[$dia])) {
+            $diasFormatados[] = $nomesDias[$dia];
+        }
+    }
+
+    return implode(', ', $diasFormatados);
+}
+
+function formatar_horario_unidade(
+    string $diasFuncionamento,
+    string $horaInicio,
+    string $horaFim
+): string {
+    $dias = nomes_dias_funcionamento($diasFuncionamento);
+    $inicio = substr($horaInicio, 0, 5);
+    $fim = substr($horaFim, 0, 5);
+
+    if ($dias === '') {
+        return "Das {$inicio} às {$fim}";
+    }
+
+    return "{$dias}, das {$inicio} às {$fim}";
+}
+
+function horario_exibicao_unidade(array $unidade): string
+{
+    return formatar_horario_unidade(
+        (string) ($unidade['dias_funcionamento'] ?? ''),
+        (string) ($unidade['hora_inicio'] ?? '08:00:00'),
+        (string) ($unidade['hora_fim'] ?? '17:00:00')
+    );
+}
+
 function listar_unidades_ativas(): array
 {
     global $conexao;

@@ -47,11 +47,6 @@ require_once __DIR__ . '/../partials/header.php';
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Horário de Atendimento</label>
-                            <input type="text" name="horario" class="form-control" required>
-                        </div>
-
-                        <div class="mb-3">
                             <label class="form-label">Dias de Funcionamento</label>
                             <input type="text" name="dias_funcionamento" class="form-control" value="1,2,3,4,5" placeholder="Ex.: 1,2,3,4,5">
                             <div class="form-text">Use números separados por vírgula: 1=Seg, 2=Ter, ..., 7=Dom.</div>

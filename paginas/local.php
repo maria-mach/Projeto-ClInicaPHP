@@ -57,7 +57,7 @@ require_once __DIR__ . '/../partials/header.php';
 
                                     <p class="mb-1">
                                         <i class="fas fa-clock text-secondary me-2"></i>
-                                        <?= esc($unidade['horario']) ?>
+                                        <?= esc(horario_exibicao_unidade($unidade)) ?>
                                     </p>
 
                                     <p class="mb-0">

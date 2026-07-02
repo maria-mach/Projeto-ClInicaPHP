@@ -1,7 +1,7 @@
 let contador = 0;
 
 $(document).ready(function () {
-  BoasVindas(); // Chama a saudação
+  boasVindas(); // Chama a saudação
   $("#infoClick").click(cliqueInfo); // Configura o clique para mostrar info
   $(".cdhover").hover(MouseEntrou, MouseSaiu); // Configura o efeito de hover
   $(".btn-ver-detalhes").click(VerDetalhes); // Configura botões de "Ver mais detalhes" em detalhes.html
@@ -15,7 +15,7 @@ $(document).ready(function () {
 
 
 // Função que exibe o Toast de boas-vindas apenas na Home
-function BoasVindas() {
+function boasVindas() {
   var caminho = window.location.pathname;
   // Verifica se estamos na raiz ou na página index.html ou index.php
   if (caminho === "/" || caminho.endsWith("index.html") || caminho.endsWith("index.php")) {

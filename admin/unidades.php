@@ -86,7 +86,7 @@ require_once __DIR__ . '/../partials/header.php';
 
                                             <td><?= esc($unidade['telefone']) ?></td>
 
-                                            <td><?= esc($unidade['horario']) ?></td>
+                                            <td><?= esc(horario_exibicao_unidade($unidade)) ?></td>
 
                                             <td>
                                                 <?= esc((string) ($unidade['dias_funcionamento'] ?? '')) ?><br>

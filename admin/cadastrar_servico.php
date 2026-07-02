@@ -26,7 +26,7 @@ require_once __DIR__ . '/../partials/header.php';
 
                 <div class="card-body">
 
-                   <form action="<?= esc(url_path('database/servicos/cadastrar_servico.php')) ?>" method="POST" enctype="multipart/form-data">
+                   <form action="<?= esc(url_path('database/servicos/cadastrar_servicos.php')) ?>" method="POST" enctype="multipart/form-data">
 
                         <div class="mb-3">
                             <label class="form-label">Nome do Serviço</label>

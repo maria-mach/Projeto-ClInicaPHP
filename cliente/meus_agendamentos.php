@@ -52,7 +52,17 @@ require_once __DIR__ . '/../partials/header.php';
 
             <?php if ($erro): ?>
                 <div class="alert alert-danger alert-dismissible fade show">
-                    Não foi possível realizar a operação. Tente novamente.
+                    <?php if ($erro === 2): ?>
+                        Não é possível agendar em uma data anterior à data atual.
+                    <?php elseif ($erro === 3): ?>
+                        Este horário não está mais disponível. Escolha outro horário.
+                    <?php elseif ($erro === 6): ?>
+                        Esta unidade não atende nesta data.
+                    <?php elseif ($erro === 7): ?>
+                        Este horário está fora do funcionamento da unidade.
+                    <?php else: ?>
+                        Não foi possível realizar a operação. Tente novamente.
+                    <?php endif; ?>
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
             <?php endif; ?>

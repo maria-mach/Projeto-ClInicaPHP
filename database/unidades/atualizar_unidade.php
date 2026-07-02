@@ -10,12 +10,12 @@ $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
 $nome = trim($_POST['nome'] ?? '');
 $endereco = trim($_POST['endereco'] ?? '');
 $telefone = trim($_POST['telefone'] ?? '');
-$horario = trim($_POST['horario'] ?? '');
 $diasFuncionamento = trim($_POST['dias_funcionamento'] ?? '1,2,3,4,5');
 $horaInicio = trim($_POST['hora_inicio'] ?? '08:00');
 $horaFim = trim($_POST['hora_fim'] ?? '17:00');
+$horario = formatar_horario_unidade($diasFuncionamento, $horaInicio . ':00', $horaFim . ':00');
 
-if (!$id || $nome === '' || $endereco === '' || $telefone === '' || $horario === '') {
+if (!$id || $nome === '' || $endereco === '' || $telefone === '' || $horaInicio === '' || $horaFim === '') {
     redirecionar(url_path('admin/unidades.php') . '?erro=1');
 }
 

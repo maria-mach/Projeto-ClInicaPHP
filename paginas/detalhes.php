@@ -1,5 +1,11 @@
 <?php
 $tituloPagina = 'Clínica Geral | Detalhes';
+require_once __DIR__ . '/../database/servicos/servicos_funcs.php';
+
+$precoConsulta = preco_a_partir_de('consulta');
+$precoExame = preco_a_partir_de('exame');
+$precoCirurgia = preco_a_partir_de('cirurgia');
+
 require_once __DIR__ . '/../partials/header.php';
 ?>
 
@@ -52,8 +58,7 @@ require_once __DIR__ . '/../partials/header.php';
                         <!-- preços -->
                         <div class="alert alert-light border shadow-sm text-center">
                             <strong>Preços médios:</strong><br>
-                            Consultas a partir de <span class="text-success fw-bold">R$120,00</span><br>
-                            Teleconsultas a partir de <span class="text-success fw-bold">R$90,00</span>
+                            Consultas a partir de <span class="text-success fw-bold"><?= esc($precoConsulta) ?></span>
                         </div>
                     </div>
                 </div>
@@ -104,8 +109,7 @@ require_once __DIR__ . '/../partials/header.php';
                         <!-- preços -->
                         <div class="alert alert-light border shadow-sm text-center">
                             <strong>Preços médios:</strong><br>
-                            Exames laboratoriais a partir de <span class="text-success fw-bold">R$40,00</span><br>
-                            Exames de imagem a partir de <span class="text-success fw-bold">R$150,00</span>
+                            Exames a partir de <span class="text-success fw-bold"><?= esc($precoExame) ?></span>
                         </div>
                     </div>
                 </div>
@@ -156,9 +160,7 @@ require_once __DIR__ . '/../partials/header.php';
                         <!-- preços -->
                         <div class="alert alert-light border shadow-sm text-center">
                             <strong>Preços médios:</strong><br>
-                            Cirurgias eletivas a partir de <span class="text-success fw-bold">R$3.500,00</span><br>
-                            Procedimentos ambulatoriais a partir de <span
-                                class="text-success fw-bold">R$1.200,00</span>
+                            Cirurgias a partir de <span class="text-success fw-bold"><?= esc($precoCirurgia) ?></span>
                         </div>
                     </div>
                 </div>

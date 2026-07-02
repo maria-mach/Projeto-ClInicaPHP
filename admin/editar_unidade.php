@@ -66,16 +66,6 @@ require_once __DIR__ . '/../partials/header.php';
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Horário de Atendimento</label>
-                            <input
-                                type="text"
-                                name="horario"
-                                class="form-control"
-                                value="<?= esc($unidade['horario']) ?>"
-                                required>
-                        </div>
-
-                        <div class="mb-3">
                             <label class="form-label">Dias de Funcionamento</label>
                             <input
                                 type="text"
