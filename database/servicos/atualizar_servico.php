@@ -26,7 +26,7 @@ if (
     redirecionar(url_path('admin/servicos.php') . '?erro=1');
 }
 
-$nomeImagem = $imagemAtual;
+$caminhoImagem = $imagemAtual;
 
 if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
     $imagem = $_FILES['imagem'];
@@ -35,26 +35,33 @@ if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
         redirecionar(url_path('admin/editar_servico.php?id=' . $id) . '&erro=2');
     }
 
-    $tiposPermitidos = ['image/jpeg', 'image/png', 'image/webp'];
+    $tiposPermitidos = [
+        'image/jpeg' => 'jpg',
+        'image/png' => 'png',
+        'image/webp' => 'webp'
+    ];
     $tipoReal = mime_content_type($imagem['tmp_name']);
 
-    if (!in_array($tipoReal, $tiposPermitidos, true)) {
+    if (!array_key_exists($tipoReal, $tiposPermitidos)) {
         redirecionar(url_path('admin/editar_servico.php?id=' . $id) . '&erro=3');
     }
 
-    $pastaDestino = __DIR__ . '/../../projeto-upload/uploads/';
+    $pastaDestino = __DIR__ . '/../../uploads/servicos/';
 
     if (!is_dir($pastaDestino)) {
         mkdir($pastaDestino, 0755, true);
     }
 
-    $extensao = strtolower(pathinfo($imagem['name'], PATHINFO_EXTENSION));
+    $extensao = $tiposPermitidos[$tipoReal];
     $nomeImagem = uniqid('servico_', true) . '.' . $extensao;
+    $caminhoImagem = 'uploads/servicos/' . $nomeImagem;
     $caminhoFinal = $pastaDestino . $nomeImagem;
 
     if (!move_uploaded_file($imagem['tmp_name'], $caminhoFinal)) {
         redirecionar(url_path('admin/editar_servico.php?id=' . $id) . '&erro=4');
     }
+
+    excluir_imagem_servico_upload($imagemAtual);
 }
 
 $atualizou = atualizar_servico(
@@ -63,7 +70,7 @@ $atualizou = atualizar_servico(
     $categoria,
     $descricao,
     $preco,
-    $nomeImagem
+    $caminhoImagem
 );
 
 if (!$atualizou) {

@@ -183,3 +183,34 @@ function atualizar_servico(
     ]);
 }
 
+function excluir_imagem_servico_upload(?string $imagem): void
+{
+    if (!$imagem) {
+        return;
+    }
+
+    $imagemNormalizada = str_replace('\\', '/', $imagem);
+    $pastasPermitidas = [
+        'uploads/servicos/'
+    ];
+
+    $pastaPermitida = false;
+
+    foreach ($pastasPermitidas as $pasta) {
+        if (str_starts_with($imagemNormalizada, $pasta)) {
+            $pastaPermitida = true;
+            break;
+        }
+    }
+
+    if (!$pastaPermitida) {
+        return;
+    }
+
+    $caminhoImagem = __DIR__ . '/../../' . $imagemNormalizada;
+
+    if (is_file($caminhoImagem)) {
+        unlink($caminhoImagem);
+    }
+}
+
