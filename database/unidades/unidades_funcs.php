@@ -202,6 +202,24 @@ function horario_dentro_funcionamento(int $unidadeId, string $horario): bool
     return $horarioInformado >= $horaInicioNormalizada && $horarioInformado <= $horaFimNormalizada;
 }
 
+function unidade_tem_agendamentos_futuros_ativos(int $unidadeId): bool
+{
+    global $conexao;
+
+    $sql = "SELECT COUNT(*)
+            FROM agendamentos
+            WHERE unidade_id = :unidade_id
+            AND data_agendamento >= CURDATE()
+            AND status IN ('pendente', 'confirmado')";
+
+    $stmt = $conexao->prepare($sql);
+    $stmt->execute([
+        'unidade_id' => $unidadeId
+    ]);
+
+    return (int) $stmt->fetchColumn() > 0;
+}
+
 function alterar_status_unidade(int $id, string $status): bool
 {
     global $conexao;

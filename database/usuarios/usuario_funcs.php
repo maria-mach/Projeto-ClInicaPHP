@@ -141,6 +141,9 @@ function excluir_usuario(int $id): bool
     global $conexao;
 
     try {
+        $usuario = buscar_usuario_por_id($id);
+        $foto = $usuario['foto'] ?? '';
+
         $conexao->beginTransaction();
 
         $stmtAgendamentos = $conexao->prepare('DELETE FROM agendamentos WHERE usuario_id = :id');
@@ -151,6 +154,10 @@ function excluir_usuario(int $id): bool
 
         $conexao->commit();
 
+        if ($excluiu) {
+            excluir_foto_usuario_upload($foto);
+        }
+
         return $excluiu;
     } catch (PDOException $e) {
         if ($conexao->inTransaction()) {
@@ -158,6 +165,25 @@ function excluir_usuario(int $id): bool
         }
 
         return false;
+    }
+}
+
+function excluir_foto_usuario_upload(?string $foto): void
+{
+    if (!$foto || $foto === 'assets/img/padrao.png') {
+        return;
+    }
+
+    $fotoNormalizada = str_replace('\\', '/', $foto);
+
+    if (!str_starts_with($fotoNormalizada, 'uploads/usuarios/')) {
+        return;
+    }
+
+    $caminhoFoto = __DIR__ . '/../../' . $fotoNormalizada;
+
+    if (is_file($caminhoFoto)) {
+        unlink($caminhoFoto);
     }
 }
 

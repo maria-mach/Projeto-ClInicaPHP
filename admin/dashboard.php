@@ -29,22 +29,6 @@ $visitas = contar_acesso_restrito();
                     <div class="row g-4">
 
                         <div class="col-md-6">
-                            <a href="<?= esc(url_path('admin/cadastrar_servico.php')) ?>" class="text-decoration-none">
-                                <div class="card h-100 border-success shadow-sm">
-                                    <div class="card-body d-flex align-items-center gap-3">
-                                        <div class="bg-success bg-opacity-10 text-success rounded-circle p-3">
-                                            <i class="fas fa-plus fs-3"></i>
-                                        </div>
-                                        <div>
-                                            <h5 class="fw-bold text-success mb-1">Cadastrar Serviço</h5>
-                                            <p class="text-muted mb-0">Adicione novos serviços com preço e imagem.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="col-md-6">
                             <a href="<?= esc(url_path('admin/comentarios.php')) ?>" class="text-decoration-none">
                                 <div class="card h-100 border-primary shadow-sm">
                                     <div class="card-body d-flex align-items-center gap-3">
@@ -69,7 +53,7 @@ $visitas = contar_acesso_restrito();
                                         </div>
                                         <div>
                                             <h5 class="fw-bold text-info mb-1">Gerenciar Serviços</h5>
-                                            <p class="text-muted mb-0">Edite, ative ou inative serviços cadastrados.</p>
+                                            <p class="text-muted mb-0">Cadastre, edite, ative ou inative serviços.</p>
                                         </div>
                                     </div>
                                 </div>

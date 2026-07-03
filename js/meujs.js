@@ -16,15 +16,11 @@ $(document).ready(function () {
 
 // Função que exibe o Toast de boas-vindas apenas na Home
 function boasVindas() {
-  var caminho = window.location.pathname;
-  // Verifica se estamos na raiz ou na página index.html ou index.php
-  if (caminho === "/" || caminho.endsWith("index.html") || caminho.endsWith("index.php")) {
-    const toastLiveExample = document.getElementById('welcomeToast');
-    if (toastLiveExample) {
-      // Inicializa o componente de Toast do Bootstrap e o exibe
-      const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
-      toastBootstrap.show();
-    }
+  const toastLiveExample = document.getElementById("welcomeToast");
+
+  if (toastLiveExample && window.bootstrap?.Toast) {
+    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+    toastBootstrap.show();
   }
 }
 

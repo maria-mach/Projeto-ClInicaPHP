@@ -38,7 +38,11 @@ require_once __DIR__ . '/../partials/header.php';
 
             <?php if ($erro): ?>
                 <div class="alert alert-danger alert-dismissible fade show">
-                    Ocorreu um erro ao processar a operação.
+                    <?php if ($erro === 4): ?>
+                        Não é possível inativar uma unidade com agendamentos futuros pendentes ou confirmados.
+                    <?php else: ?>
+                        Ocorreu um erro ao processar a operação.
+                    <?php endif; ?>
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
             <?php endif; ?>

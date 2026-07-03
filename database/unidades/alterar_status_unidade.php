@@ -15,6 +15,10 @@ if (!$id || !in_array($status, $statusPermitidos, true)) {
     redirecionar(url_path('admin/unidades.php') . '?erro=1');
 }
 
+if ($status === 'inativo' && unidade_tem_agendamentos_futuros_ativos($id)) {
+    redirecionar(url_path('admin/unidades.php') . '?erro=4');
+}
+
 $atualizou = alterar_status_unidade($id, $status);
 
 if (!$atualizou) {
