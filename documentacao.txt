@@ -4,8 +4,9 @@
 
 Arquivo analisado: js/meujs.js
 Projeto: ClinicaPHP
-Observação: nenhuma função foi excluída. As funções sem uso atual foram apenas
-marcadas como "LEGADO/SEM USO ATUAL" para revisão futura.
+Observação: funções sem uso atual foram marcadas como "LEGADO/SEM USO ATUAL"
+para revisão futura. Funções removidas do JavaScript atual aparecem apenas como
+legado documental.
 
 ================================================================================
 1. $(document).ready(...)
@@ -31,10 +32,9 @@ pois o jQuery simplesmente não encontra elementos correspondentes.
 ================================================================================
 2. boasVindas()
 ================================================================================
-Status: LEGADO/SEM USO ATUAL VISÍVEL
+Status: ATIVO
 Local previsto: Home (index.php / paginas/index.php)
-Descrição: deveria exibir um Toast de boas-vindas quando a página inicial fosse
-aberta.
+Descrição: exibe um Toast de boas-vindas quando a página inicial é aberta.
 Dependência HTML: elemento com ID "welcomeToast".
 Situação encontrada: o elemento "welcomeToast" está em paginas/index.php.
 Portanto, a função exibe o Toast de boas-vindas ao abrir a página inicial.
@@ -242,7 +242,8 @@ Classificação:
 Como funciona:
 - O cadastro cria usuários do tipo cliente.
 - O perfil permite consultar e alterar dados do usuário, endereço e foto.
-- A exclusão da conta remove o usuário e os agendamentos vinculados.
+- A exclusão da conta remove o usuário, os agendamentos vinculados e a foto em
+  uploads/usuarios, quando houver imagem enviada pelo usuário.
 - O CPF e o e-mail são únicos e validados antes da inserção.
 
 2. Login / Fixo
@@ -494,6 +495,8 @@ Como funciona:
 - Uma unidade pode ser ativada ou inativada.
 - A página pública mostra apenas unidades ativas.
 - O horário exibido é calculado por dias_funcionamento, hora_inicio e hora_fim.
+- A inativação é bloqueada quando a unidade possui agendamentos futuros com
+  status pendente ou confirmado.
 
 ================================================================================
 CRUD ADMINISTRATIVO DE SERVIÇOS
@@ -560,6 +563,8 @@ Como funciona:
 - A informação visual de horário é gerada por horario_exibicao_unidade(), usando
   dias_funcionamento, hora_inicio e hora_fim. Assim, quando a unidade é editada,
   a página pública acompanha a atualização.
+- Não é possível inativar unidade com agendamentos futuros pendentes ou
+  confirmados.
 
 ================================================================================
 CRUD OPERACIONAL DE AGENDAMENTOS
@@ -650,6 +655,7 @@ Como funciona:
 - A foto atualizada aparece no perfil, no header e em paginas/clientes.php.
 - A exclusão da conta remove o usuário e os agendamentos vinculados, evitando erro
   de chave estrangeira.
+- Se a foto do usuário estiver em uploads/usuarios, o arquivo também é removido.
 
 ================================================================================
 CATÁLOGO FIXO / SEM CRUD PRÓPRIO
